@@ -16,11 +16,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-     	  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
-          crossorigin="anonymous">
+    
 
-<!--[if gte mso 9]><xml>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"><!--[if gte mso 9]><xml>
 <mso:CustomDocumentProperties>
 <mso:_dlc_DocId msdt:dt="string">Z5HNVW24N33T-678105430-3966</mso:_dlc_DocId>
 <mso:_dlc_DocIdItemGuid msdt:dt="string">029a8575-4aad-4138-b05d-5f86afb8c356</mso:_dlc_DocIdItemGuid>
