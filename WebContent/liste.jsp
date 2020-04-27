@@ -28,22 +28,14 @@
 </head>
 
 <body>
-	<c:if test="${!empty listeCodesErreur}">
-			<div class="alert alert-danger" role="alert">
-			  <ul>
-			  	<c:forEach var="code" items="${listeCodesErreur}">
-			  		<li>${LecteurMessage.getMessageErreur(code)}</li>
-			  	</c:forEach>
-			  </ul>
-			</div>
-	</c:if>
 
 	<div class="container">
 		<div class="row">
 			<ul class="list-group col-12">
-				<c:forEach var="code" items="${listes}">
-					<li class="list-group-item d-flex justify-content-between align-items-center"> id:  ${code.id}</li>
-				</c:forEach>
+					<li class="list-group-item d-flex justify-content-between align-items-center" >${id}</li>
+					<li class="list-group-item d-flex justify-content-between align-items-center"> ${pseudo}</li>
+					<li class="list-group-item d-flex justify-content-between align-items-center"> ${password}</li>
+			
 			</ul>
 		</div>	
 	</div>

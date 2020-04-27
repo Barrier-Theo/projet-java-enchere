@@ -99,7 +99,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 		@Override
 		public Integer findIdByPseudoPassword(String pseudo, String password) throws BusinessException{
-			Utilisateur utilisateur = new Utilisateur();
 			if(pseudo == null && password == null)
 			{
 				BusinessException businessException = new BusinessException();
@@ -109,29 +108,28 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			
 			try(Connection cnx = ConnectionProvider.getConnection())
 			{
+				Integer idUtilisateur = null;
 				try
 				{
 					PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_PSEUDO_PASSWORD);
 					pstmt.setString(1, pseudo);
 					pstmt.setString(2, password);
 					ResultSet rs = pstmt.executeQuery();
-					if(rs.getString("pseudo").equals(pseudo) && rs.getString("mot_de_passe").equals(password)) {
-						utilisateur.setPseudo(pseudo);
-						utilisateur.setMotDePasse(password);
-						
-					}else {
-						return null;
+					while(rs.next())
+					{	
+						idUtilisateur = rs.getInt("no_utilisateur");
 					}
+					
 					
 					rs.close();
 					pstmt.close();
-					return rs.getInt("no_utilisateur");
+					return idUtilisateur;
 					
 				}
 				catch(Exception e)
 				{
 					e.printStackTrace();
-					System.out.println("erreur connexion");
+					System.out.println("erreur authentification");
 					cnx.rollback();
 					throw e;
 				}

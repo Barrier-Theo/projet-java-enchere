@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="messages.LecteurMessage" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="fr">
 
@@ -15,13 +19,21 @@
 </head>
 
 <body class="text-center">
-
-    <form class="form-signin" action="" method="POST">
+	<c:if test="${!empty listeCodesErreur}">
+			<div class="alert alert-danger" role="alert">
+			  <ul>
+			  	<c:forEach var="code" items="${listeCodesErreur}">
+			  		<li>${LecteurMessage.getMessageErreur(code)}</li>
+			  	</c:forEach>
+			  </ul>
+			</div>
+	</c:if>
+    <form class="form-signin" action="${pageContext.request.contextPath}/ServletAccueil" method="POST">
 
         <h1 class="h3 mb-3 font-weight-normal marginbottom">Connexion</h1>
 
         <label for="inputEmail" class="sr-only">Login</label>
-        <input type="text" class="form-control" placeholder="Identifiant" required autofocus name="id">
+        <input type="text" class="form-control" placeholder="Pseudo" required autofocus name="pseudo">
 
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" class="form-control" placeholder="Mot de passe" required name="password">
@@ -42,7 +54,7 @@
 
         <a href="#" class="">mot de passe oublié</a>
 
-        <a style="color:white;" class="btn btn-lg btn-primary btn-block margintop marginbottom" type="submit">Créer un compte</a>
+        <a style="color:white;" class="btn btn-lg btn-primary btn-block margintop marginbottom">Créer un compte</a>
 
     </form>
 </body>

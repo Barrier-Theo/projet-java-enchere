@@ -40,7 +40,7 @@ public class ServletAccueil extends HttpServlet {
 		try {
 			List<Utilisateur> listes = listeManager.selectAll();
 			request.setAttribute("listes", listes);
-			rd = request.getRequestDispatcher("/liste.jsp");
+			rd = request.getRequestDispatcher("/connexion.jsp");
 			rd.forward(request, response);
 		}catch(BusinessException e) {
 			e.printStackTrace();
@@ -60,18 +60,24 @@ public class ServletAccueil extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-
+		Integer idUtilisateur = null ;
 		try {
-			Integer idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
+			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
 			request.setAttribute("id", idUtilisateur);
-			rd = request.getRequestDispatcher("/liste.jsp");
-			rd.forward(request, response);
+			request.setAttribute("pseudo", pseudo);
+			request.setAttribute("password", password);
+		
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 		}
-		doGet(request, response);
-		
+		if(idUtilisateur == null) {
+			rd = request.getRequestDispatcher("/connexion.jsp");
+		}else {
+			rd = request.getRequestDispatcher("/liste.jsp");
+		}
+		rd.forward(request, response);
+
 		
 	}
 
