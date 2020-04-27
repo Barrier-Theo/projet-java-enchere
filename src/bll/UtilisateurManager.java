@@ -10,8 +10,9 @@ import servlet.BusinessException;
 
 
 public class UtilisateurManager {
+	private BusinessException businessException = new BusinessException();
 
-	private UtilisateurDAO listeDAO;
+	private UtilisateurDAO utilisateurDAO;
 	
 	/**
 	 * Le constructeur permet d'initialiser la variable membre avisDAO pour 
@@ -19,7 +20,7 @@ public class UtilisateurManager {
 	 * @return 
 	 */
 	public UtilisateurManager() {
-		this.listeDAO=DAOFactory.getAvisDAO();
+		this.utilisateurDAO=DAOFactory.getAvisDAO();
 	}
 	/**
 	 * @param description
@@ -29,31 +30,53 @@ public class UtilisateurManager {
 	 */
 	public Utilisateur ajouterListeEtArticle(String nomListe, String nomArticle) throws BusinessException
 	{
-		BusinessException exception = new BusinessException();
+
 		Utilisateur liste = new Utilisateur();
-		this.verifNomListe(nomListe, exception);
 		liste.setNom(nomListe);
 		
-		if(!exception.hasErreurs())
+		if(!businessException.hasErreurs())
 		{
-			this.listeDAO.insert(liste);
+			this.utilisateurDAO.insert(liste);
 		}
 		
-		if(exception.hasErreurs())
+		if(businessException.hasErreurs())
 		{
-			throw exception;
+			throw businessException;
 		}
 		return liste;
 	}
 	
 	public List<Utilisateur> selectAll() throws BusinessException{
-		return this.listeDAO.selectAll();
+		return this.utilisateurDAO.selectAll();
 	}
 	
-	public void verifNomListe(String nom, BusinessException businessException) {
-		if(nom==null || nom.trim().isEmpty() || nom.length() > 50)
+	public Integer findIdByPseudoPassword(String pseudo, String password) throws BusinessException {
+		Integer idUtilisateur = null;
+
+		this.verifPeudoEtPassword(pseudo, password);
+		if(!businessException.hasErreurs())
 		{
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_NOM_LISTE);
+			idUtilisateur = this.utilisateurDAO.findIdByPseudoPassword(pseudo, password);
+		}
+		
+		if(businessException.hasErreurs())
+		{
+			throw businessException;
+		}
+		
+		return idUtilisateur;
+	}
+
+	
+	public void verifPeudoEtPassword(String pseudo, String password) {
+		if(pseudo==null || pseudo.trim().isEmpty() || pseudo.length() > 30)
+		{
+			this.businessException.ajouterErreur(CodesResultatBLL.REGLE_PSEUDO);
+		}
+		
+		if(password==null || password.trim().isEmpty() || password.length() > 30)
+		{
+			this.businessException.ajouterErreur(CodesResultatBLL.REGLE_MOTDEPASSE);
 		}
 	}
 	

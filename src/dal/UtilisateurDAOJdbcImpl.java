@@ -16,6 +16,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 		private static final String INSERT_UTILISATEUR="";
 		private static final String SELECT_ALL="SELECT * FROM UTILISATEURS";
+		private static final String SELECT_BY_PSEUDO_PASSWORD="SELECT * FROM UTILISATEURS where pseudo = ? and mot_de_passe = ?";
+
+		
 		
 
 		public void insert(Utilisateur liste) throws BusinessException {
@@ -92,4 +95,54 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			
 			return userListe;
 		}
+
+
+		@Override
+		public Integer findIdByPseudoPassword(String pseudo, String password) throws BusinessException{
+			Utilisateur utilisateur = new Utilisateur();
+			if(pseudo == null && password == null)
+			{
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+				throw businessException;
+			}
+			
+			try(Connection cnx = ConnectionProvider.getConnection())
+			{
+				try
+				{
+					PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_PSEUDO_PASSWORD);
+					pstmt.setString(1, pseudo);
+					pstmt.setString(2, password);
+					ResultSet rs = pstmt.executeQuery();
+					if(rs.getString("pseudo").equals(pseudo) && rs.getString("mot_de_passe").equals(password)) {
+						utilisateur.setPseudo(pseudo);
+						utilisateur.setMotDePasse(password);
+						
+					}else {
+						return null;
+					}
+					
+					rs.close();
+					pstmt.close();
+					return rs.getInt("no_utilisateur");
+					
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.out.println("erreur connexion");
+					cnx.rollback();
+					throw e;
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				throw businessException;
+			}
+		}
+		
 }
