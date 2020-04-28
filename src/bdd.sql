@@ -96,3 +96,7 @@ INSERT INTO UTILISATEURS VALUES('tbarrier','barrier','theo', 'theo.barrier@hotma
 
 ALTER TABLE UTILISATEURS 
 ALTER COLUMN email VARCHAR(50);
+
+SELECT * FROM UTILISATEURS;
+
+SELECT * FROM UTILISATEURS where pseudo = 'tbarrier' and mot_de_passe = '123mdp';
