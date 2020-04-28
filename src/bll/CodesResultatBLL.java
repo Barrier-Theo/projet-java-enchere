@@ -17,7 +17,6 @@ public abstract class CodesResultatBLL {
 	public static final int REGLE_RUE=20006;
 	public static final int REGLE_CODEPOSTALE=20007;
 	public static final int REGLE_VILLE=20008;
-
 	public static final int IDENTIFIANTS_INCORRECTES=20009;
 
 

@@ -9,15 +9,15 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="index.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 
 <body class="text-center">
 
-    <form class="form-modif" action="" method="POST">
+    <form class="form-modif" action="${pageContext.request.contextPath}/ServletInscription" method="POST">
 
-        <h1 class="h3 mb-3 font-weight-normal marginbottom">Mon Profil</h1>
+        <h1 class="h3 mb-3 font-weight-normal marginbottom">Créer votre profil</h1>
 
         <div class="alert alert-danger" role="alert">
             A simple danger alertâ€”check it out!
@@ -37,14 +37,14 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="inputPrenom" class="col-sm-5 col-form-label">PrÃ©nom :</label>
+                        <label for="inputPrenom" class="col-sm-5 col-form-label">Prénom :</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="inputPrenom" name="prenom">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="inputTelephone" class="col-sm-5 col-form-label">TÃ©lÃ©phone :</label>
+                        <label for="inputTelephone" class="col-sm-5 col-form-label">Téléphone :</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="inputTelephone" name="telephone">
                         </div>
@@ -105,10 +105,10 @@
                 </div>
 
                 <div class="offset-3 col-3">
-                    <button class="btn btn-lg btn-success btn-block margintop" type="submit">CrÃ©er</button>
+                    <button class="btn btn-lg btn-success btn-block margintop" type="submit">Créer</button>
                 </div>
                 <div class=" col-4">
-                    <a style="color: white;" class="btn btn-lg btn-danger btn-block margintop">Annuler</a>
+                    <a href ="${pageContext.request.contextPath}" style="color: white;" class="btn btn-lg btn-danger btn-block margintop">Annuler</a>
                 </div>
 
             </div>

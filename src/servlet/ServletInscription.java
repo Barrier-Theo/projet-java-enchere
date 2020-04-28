@@ -52,7 +52,12 @@ public class ServletInscription extends HttpServlet {
 		
 		Utilisateur nouvelUtilisateur = new Utilisateur(pseudo,nom,prenom,email,telephone, rue,codePostal,ville,password, 500, false);
 		UtilisateurManager utilisateurManager = new UtilisateurManager();	
-		utilisateurManager.ajouterUtilisateur(nouvelUtilisateur);
+		try {
+			utilisateurManager.ajouterUtilisateur(nouvelUtilisateur);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 				
 		
