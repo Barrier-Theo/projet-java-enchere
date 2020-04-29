@@ -34,7 +34,7 @@ public class ServletInscription extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Lecture des parametres après soumission du formulaire
-		
+		RequestDispatcher rd = null;
 		Map params = request.getParameterMap();
 		List<Integer> listeCodesErreur=new ArrayList<>();
 			
@@ -49,21 +49,26 @@ public class ServletInscription extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codePostal =  request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
+		String passwordCfm = request.getParameter("confirmation");
+		
+		if(!password.equals(passwordCfm)) {
+			request.setAttribute("erreurMdps","Les mots de passes ne sont pas identiques");
+		}
 		
 		Utilisateur nouvelUtilisateur = new Utilisateur(pseudo,nom,prenom,email,telephone, rue,codePostal,ville,password, 500, false);
 		UtilisateurManager utilisateurManager = new UtilisateurManager();	
 		try {
 			utilisateurManager.ajouterUtilisateur(nouvelUtilisateur);
+			//TODO definir sur page d'accueil.
+			rd = request.getRequestDispatcher("/liste.jsp");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			rd = request.getRequestDispatcher("/inscription.jsp");
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 		}
 		
-				
+		rd.forward(request, response);			
 		
-		//TODO A définir la page d'accueil enchere 
-		RequestDispatcher rd = request.getRequestDispatcher("page accueil enchere ");
-		rd.forward(request, response);		
 		
 	}
 

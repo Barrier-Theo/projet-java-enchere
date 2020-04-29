@@ -19,19 +19,20 @@
 </head>
 
 <body class="text-center">
-	<c:if test="${!empty listeCodesErreur}">
-			<div class="alert alert-danger" role="alert">
+	
+    <form class="form-signin" action="${pageContext.request.contextPath}/ServletConnexionUtilisateur" method="POST">
+
+        <h1 class="h3 mb-3 font-weight-normal marginbottom">Connexion</h1>
+		<c:if test="${!empty listeCodesErreur}">
+			<div class="alert alert-danger text-left" role="alert">
 			  <ul>
 			  	<c:forEach var="code" items="${listeCodesErreur}">
 			  		<li>${LecteurMessage.getMessageErreur(code)}</li>
 			  	</c:forEach>
 			  </ul>
 			</div>
-	</c:if>
-    <form class="form-signin" action="${pageContext.request.contextPath}/ServletAccueil" method="POST">
-
-        <h1 class="h3 mb-3 font-weight-normal marginbottom">Connexion</h1>
-
+		</c:if>
+		
         <label for="inputEmail" class="sr-only">Login</label>
         <input type="text" class="form-control" placeholder="Pseudo" required autofocus name="pseudo">
 
@@ -54,7 +55,7 @@
 
         <a href="#" class="">mot de passe oublié</a>
 
-        <a href="${pageContext.request.contextPath}/creerProfil.jsp" style="color:white;" class="btn btn-lg btn-primary btn-block margintop marginbottom">Créer un compte</a>
+        <a href="${pageContext.request.contextPath}/inscription.jsp" style="color:white;" class="btn btn-lg btn-primary btn-block margintop marginbottom">Créer un compte</a>
 
     </form>
 </body>
