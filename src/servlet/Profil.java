@@ -45,7 +45,7 @@ public class Profil extends HttpServlet {
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Integer idUtilisateur = null ;
 		try {
-			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
+			idUtilisateur = utilisateurManager.findIdByPseudoPassword(pseudo, password);
 			request.setAttribute("id", idUtilisateur);
 			request.setAttribute("pseudo", pseudo);
 			request.setAttribute("password", password);

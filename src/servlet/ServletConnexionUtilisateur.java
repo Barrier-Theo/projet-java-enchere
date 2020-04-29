@@ -19,14 +19,14 @@ import bo.Utilisateur;
 /**
  * Servlet implementation class ServletListAccueil
  */
-@WebServlet("/ServletAccueil")
-public class ServletAccueil extends HttpServlet {
+@WebServlet("/ServletConnexionUtilisateur")
+public class ServletConnexionUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAccueil() {
+    public ServletConnexionUtilisateur() {
         super();
     }
 
@@ -71,25 +71,20 @@ public class ServletAccueil extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		Integer idUtilisateur = null ;
+		Integer idUtilisateur = null;
 		try {
 			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
 			session.setAttribute("id", idUtilisateur);
 			request.setAttribute("pseudo", pseudo);
 			request.setAttribute("password", password);
-		
+			rd = request.getRequestDispatcher("/liste.jsp");
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-		}
-		if(idUtilisateur == null) {
 			rd = request.getRequestDispatcher("/connexion.jsp");
-		}else {
-			rd = request.getRequestDispatcher("/nouvelleVente.jsp");
+
 		}
 		rd.forward(request, response);
-
-		
 	}
 
 }

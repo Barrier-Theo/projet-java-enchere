@@ -6,7 +6,7 @@ package bll;
 public abstract class CodesResultatBLL {
 	
 	/**
-	 * Echec quand ne respecte pas les règles définies
+	 * Echec quand ne respecte pas les rÃ¨gles dÃ©finies
 	 */
 	public static final int REGLE_PSEUDO=20000;
 	public static final int REGLE_MOTDEPASSE=20001;
@@ -18,6 +18,10 @@ public abstract class CodesResultatBLL {
 	public static final int REGLE_CODEPOSTALE=20007;
 	public static final int REGLE_VILLE=20008;
 	public static final int IDENTIFIANTS_INCORRECTES=20009;
+	public static final int SPEUDO_EMAIL_NON_UNIQUE=20010;
+	
+	
+
 
 
 

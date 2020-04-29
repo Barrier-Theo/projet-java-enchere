@@ -62,7 +62,7 @@ public class UtilisateurManager {
 		}
 		
 		if(idUtilisateur == null) {
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			this.businessException.ajouterErreur(CodesResultatBLL.IDENTIFIANTS_INCORRECTES);
 		}
 
 		if(this.businessException.hasErreurs())
@@ -78,7 +78,7 @@ public class UtilisateurManager {
 		boolean erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur);
 
 		if(erreur) {
-			this.businessException.ajouterErreur(CodeResultatBLL.SPEUDO_EMAIL_NON_UNIQUE);
+			this.businessException.ajouterErreur(CodesResultatBLL.SPEUDO_EMAIL_NON_UNIQUE);
 		}
 
 
@@ -126,7 +126,7 @@ public class UtilisateurManager {
 		this.verifNullTrimLength(nom, 30, CodesResultatBLL.REGLE_NOM);
 		this.verifNullTrimLength(prenom, 30, CodesResultatBLL.REGLE_PRENOM);
 		this.verifNullTrimLength(email, 50, CodesResultatBLL.REGLE_EMAIL);
-		this.verifNullTrimLength(telephone, 30, CodesResultatBLL.REGLE_TELEPHONE);
+		this.verifNullTrimLength(telephone, 15, CodesResultatBLL.REGLE_TELEPHONE);
 		this.verifNullTrimLength(rue, 30, CodesResultatBLL.REGLE_VILLE);
 		this.verifNullTrimLength(codePostale, 10, CodesResultatBLL.REGLE_CODEPOSTALE);
 		this.verifNullTrimLength(ville, 10, CodesResultatBLL.REGLE_VILLE);
