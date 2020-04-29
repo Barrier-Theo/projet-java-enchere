@@ -33,7 +33,7 @@ public class ServletInscription extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Lecture des parametres après soumission du formulaire
+		//Lecture des parametres aprï¿½s soumission du formulaire
 		RequestDispatcher rd = null;
 		Map params = request.getParameterMap();
 		List<Integer> listeCodesErreur=new ArrayList<>();
@@ -60,7 +60,7 @@ public class ServletInscription extends HttpServlet {
 		try {
 			utilisateurManager.ajouterUtilisateur(nouvelUtilisateur);
 			//TODO definir sur page d'accueil.
-			rd = request.getRequestDispatcher("/liste.jsp");
+			rd = request.getRequestDispatcher("/connexion.jsp");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			rd = request.getRequestDispatcher("/inscription.jsp");
