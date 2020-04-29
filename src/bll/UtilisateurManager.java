@@ -80,4 +80,21 @@ public class UtilisateurManager {
 		}
 	}
 	
+	public Utilisateur selectUser(String id) {
+		// TODO Auto-generated method stub
+		
+		Utilisateur utilisateur = new Utilisateur();
+		
+		try {
+			utilisateur = this.utilisateurDAO.selectUser(id);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return utilisateur;
+	}
+	
+	
+	
 }

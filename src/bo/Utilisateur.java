@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Data;
 
+
 @Data
 public class Utilisateur  {
     private Integer id;
@@ -45,6 +46,9 @@ public class Utilisateur  {
     	this.credit = credit;
     	this.isAdmin = isAdmin;
     }
+
+    
+    
     				
     
   

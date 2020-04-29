@@ -13,4 +13,6 @@ public interface UtilisateurDAO {
 	
 	public Integer findIdByPseudoPassword(String pseudo, String password) throws BusinessException;
 	
+	public Utilisateur selectUser(String id) throws BusinessException;
+	
 }

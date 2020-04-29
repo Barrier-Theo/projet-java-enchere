@@ -60,3 +60,17 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.form-modif {
+    width: 100%;
+    max-width: 1200px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.profil {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    margin: 0 auto;
+}
