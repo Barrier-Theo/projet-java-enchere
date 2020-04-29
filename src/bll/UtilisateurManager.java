@@ -3,6 +3,7 @@ package bll;
 import java.util.List;
 
 import bo.Utilisateur;
+import dal.CodesResultatDAL;
 import dal.DAOFactory;
 import dal.UtilisateurDAO;
 import bll.CodesResultatBLL;
@@ -22,29 +23,7 @@ public class UtilisateurManager {
 	public UtilisateurManager() {
 		this.utilisateurDAO=DAOFactory.getUtilisateurDAO();
 	}
-	/**
-	 * @param description
-	 * @param note
-	 * @return un objet Avis en cas de succcès
-	 * @throws BusinessException 
-	 */
-	public Utilisateur ajouterListeEtArticle(String nomListe, String nomArticle) throws BusinessException
-	{
-
-		Utilisateur liste = new Utilisateur();
-		liste.setNom(nomListe);
-		
-		if(!businessException.hasErreurs())
-		{
-			this.utilisateurDAO.insert(liste);
-		}
-		
-		if(businessException.hasErreurs())
-		{
-			throw businessException;
-		}
-		return liste;
-	}
+	
 	
 	public List<Utilisateur> selectAll() throws BusinessException{
 		return this.utilisateurDAO.selectAll();
@@ -52,32 +31,74 @@ public class UtilisateurManager {
 	
 	public Integer findIdByPseudoPassword(String pseudo, String password) throws BusinessException {
 		Integer idUtilisateur = null;
-
-		this.verifPeudoEtPassword(pseudo, password);
-		if(!businessException.hasErreurs())
+		
+		this.verifNullTrimLength(pseudo, 30, CodesResultatBLL.REGLE_PSEUDO);
+		this.verifNullTrimLength(password, 30, CodesResultatBLL.REGLE_MOTDEPASSE);
+		if(!this.businessException.hasErreurs())
 		{
 			idUtilisateur = this.utilisateurDAO.findIdByPseudoPassword(pseudo, password);
 		}
 		
-		if(businessException.hasErreurs())
+		if(idUtilisateur == null) {
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+		}
+		
+		if(this.businessException.hasErreurs())
 		{
-			throw businessException;
+			throw this.businessException;
 		}
 		
 		return idUtilisateur;
 	}
-
 	
-	public void verifPeudoEtPassword(String pseudo, String password) {
-		if(pseudo==null || pseudo.trim().isEmpty() || pseudo.length() > 30)
-		{
-			this.businessException.ajouterErreur(CodesResultatBLL.REGLE_PSEUDO);
+	public void ajouterUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		this.verifUtilisateur(utilisateur);
+		boolean erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur); 
+		
+		if(erreur) {
+			this.businessException.ajouterErreur(CodeResultatBLL.SPEUDO_EMAIL_NON_UNIQUE);
 		}
 		
-		if(password==null || password.trim().isEmpty() || password.length() > 30)
+		
+		if(!this.businessException.hasErreurs())
 		{
-			this.businessException.ajouterErreur(CodesResultatBLL.REGLE_MOTDEPASSE);
+			this.utilisateurDAO.ajouterUtilisateur(utilisateur);
+		}
+		
+		if(this.businessException.hasErreurs())
+		{
+			throw this.businessException;
 		}
 	}
 	
+	public void verifUtilisateur(Utilisateur utilisateur) {
+		String pseudo = utilisateur.getPseudo();
+		String motDePasse = utilisateur.getMotDePasse();
+		String nom = utilisateur.getNom();
+		String prenom = utilisateur.getPrenom();
+		String email = utilisateur.getEmail();
+		String telephone = utilisateur.getTelephone();
+		String rue = utilisateur.getRue();
+		String codePostale = utilisateur.getCodePostal();
+		String ville = utilisateur.getVille();
+		
+		this.verifNullTrimLength(pseudo, 30, CodesResultatBLL.REGLE_PSEUDO);
+		this.verifNullTrimLength(motDePasse, 30, CodesResultatBLL.REGLE_MOTDEPASSE);
+		this.verifNullTrimLength(nom, 30, CodesResultatBLL.REGLE_NOM);
+		this.verifNullTrimLength(prenom, 30, CodesResultatBLL.REGLE_PRENOM);
+		this.verifNullTrimLength(email, 50, CodesResultatBLL.REGLE_EMAIL);
+		this.verifNullTrimLength(telephone, 30, CodesResultatBLL.REGLE_TELEPHONE);
+		this.verifNullTrimLength(rue, 30, CodesResultatBLL.REGLE_VILLE);
+		this.verifNullTrimLength(codePostale, 10, CodesResultatBLL.REGLE_CODEPOSTALE);
+		this.verifNullTrimLength(ville, 10, CodesResultatBLL.REGLE_VILLE);
+		
+	
+	}
+	
+	public void verifNullTrimLength(String valeur, int length, int code ) {
+		if(valeur==null || valeur.trim().isEmpty() || valeur.length() > length)
+		{
+			this.businessException.ajouterErreur(code);
+		}
+	}
 }

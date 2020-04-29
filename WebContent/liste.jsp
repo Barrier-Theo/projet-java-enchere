@@ -39,6 +39,9 @@
 			</ul>
 		</div>	
 	</div>
+	
+	<a href="<%=request.getContextPath() %>/profil">Mon profil</a>
+	
 		    
     <!-- Footer -->
     <footer class="row bg-dark footer-demodule fixed-bottom py-1">

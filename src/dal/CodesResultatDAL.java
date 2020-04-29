@@ -13,9 +13,5 @@ public abstract class CodesResultatDAL {
 	public static final int INSERT_OBJET_NULL=10001;
 	
 	public static final int INSERT_OBJET_ECHEC=10002;
-
-	 
-	
-	
 	
 }
