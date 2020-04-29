@@ -1,28 +1,28 @@
 package bo;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.Data;
 
 @Data
-public class ArticleVendus {
+public class ArticlesVendus {
 
 	private Integer noArticle;
 	private String nomArticle;
 	private String description;
-	private Date dateDebutEncheres;
-	private Date dateFinEncheres;
-	private Float miseAPrix;
-	private Float prixVente;
+	private LocalDate dateDebutEncheres;
+	private LocalDate dateFinEncheres;
+	private Integer miseAPrix;
+	private Integer prixVente;
 	private Integer noUtilisateur;
 	private Integer noCategorie;
-	
-	public ArticleVendus() {
-		
+
+	public ArticlesVendus() {
+
 	}
-	
-	public ArticleVendus(Integer noArticle, String nomArticle, String description, Date dateDebutEncheres, Date dateFinEncheres, 
-			Float miseAPrix, Float prixVente, Integer noUtilisateur, Integer noCategorie) {
+
+	public ArticlesVendus(Integer noArticle, String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, 
+			Integer miseAPrix, Integer prixVente, Integer noUtilisateur, Integer noCategorie) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -33,5 +33,5 @@ public class ArticleVendus {
 		this.noUtilisateur = noUtilisateur;
 		this.noCategorie = noCategorie;
 	}
-	
+
 }
