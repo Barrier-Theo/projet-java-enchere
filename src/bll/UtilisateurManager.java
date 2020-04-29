@@ -21,7 +21,7 @@ public class UtilisateurManager {
 	 * @return 
 	 */
 	public UtilisateurManager() {
-		this.utilisateurDAO=DAOFactory.getAvisDAO();
+		this.utilisateurDAO=DAOFactory.getUtilisateurDAO();
 	}
 	
 	

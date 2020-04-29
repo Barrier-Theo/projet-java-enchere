@@ -62,8 +62,8 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Integer idUtilisateur = null;
 		try {
-			idUtilisateur = utilisateurManager.findIdByPseudoPassword(pseudo, password);
-			request.setAttribute("id", idUtilisateur);
+			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
+			session.setAttribute("id", idUtilisateur);
 			request.setAttribute("pseudo", pseudo);
 			request.setAttribute("password", password);
 			rd = request.getRequestDispatcher("/liste.jsp");
@@ -71,8 +71,9 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 			rd = request.getRequestDispatcher("/connexion.jsp");
+
 		}
-		rd.forward(request, response);	
+		rd.forward(request, response);
 	}
 
 }
