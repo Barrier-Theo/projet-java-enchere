@@ -28,7 +28,7 @@ body {
 
 .form-signin {
     width: 100%;
-    max-width: 380px;
+    max-width: 370px;
     padding: 15px;
     margin: 0 auto;
 }
@@ -59,4 +59,11 @@ body {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.form-modif {
+    width: 100%;
+    max-width: 1200px;
+    padding: 15px;
+    margin: 0 auto;
 }
