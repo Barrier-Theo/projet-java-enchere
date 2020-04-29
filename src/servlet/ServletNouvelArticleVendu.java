@@ -47,7 +47,7 @@ public class ServletNouvelArticleVendu extends HttpServlet{
 
 		ArticlesVendusManager articlesVendusManager = new ArticlesVendusManager();
 		Integer idUtilisateur = (Integer)session.getAttribute("id");
-		System.out.println("idUtilisateur : " + idUtilisateur);
+		
 		try {
 			articlesVendusManager.ajouterVente(request.getParameter("libelleArticle"), request.getParameter("descriptionArticle"), LocalDate.parse(request.getParameter("dateDebutArticle")), LocalDate.parse(request.getParameter("dateFinArticle")), Integer.parseInt(request.getParameter("prixDepartArticle")), 0, idUtilisateur, 1);
 
