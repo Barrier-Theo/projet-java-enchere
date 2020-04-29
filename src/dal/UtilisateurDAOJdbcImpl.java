@@ -17,6 +17,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		private static final String INSERT_UTILISATEUR="INSERT INTO VALUES(?,?,?,?,?,?,?,?,?)";
 		private static final String SELECT_ALL="SELECT * FROM UTILISATEURS";
 		private static final String SELECT_BY_PSEUDO_PASSWORD="SELECT * FROM UTILISATEURS where pseudo = ? and mot_de_passe = ?";
+		private static final String SELECT_SPEUDO_EMAIL_UNICITE="SELECT * FROM UTILISATEURS where pseudo = ? and mot_de_passe = ?";
 
 
 		@Override
@@ -145,5 +146,37 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				throw businessException;
 			}
 			
+		}
+
+
+		@Override
+		public boolean verifUnicitePseudoEmail(Utilisateur utilisateur) throws BusinessException {
+			List<Utilisateur> userListe = new ArrayList<Utilisateur>();
+			boolean erreur= false;
+			String pseudo = utilisateur.getPseudo();
+			String email = utilisateur.getEmail();
+			try(Connection cnx = ConnectionProvider.getConnection())
+			{
+				PreparedStatement pstmt = cnx.prepareStatement(SELECT_SPEUDO_EMAIL_UNICITE);
+				ResultSet rs = pstmt.executeQuery();
+	
+				while(rs.next())
+				{
+					if(rs.getString("pseudo").equals(pseudo) || rs.getString("email").equals(email)) {
+						erreur = true;
+					}
+					userListe.add(new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("nom")));
+				}
+				
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_LISTE_ECHEC);
+				throw businessException;
+			}
+			
+			return erreur;
 		}	
 }

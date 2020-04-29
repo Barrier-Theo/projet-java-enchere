@@ -53,6 +53,12 @@ public class UtilisateurManager {
 	
 	public void ajouterUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		this.verifUtilisateur(utilisateur);
+		boolean erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur); 
+		
+		if(erreur) {
+			this.businessException.ajouterErreur(CodeResultatBLL.SPEUDO_EMAIL_NON_UNIQUE);
+		}
+		
 		
 		if(!this.businessException.hasErreurs())
 		{

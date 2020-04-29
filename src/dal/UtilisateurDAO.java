@@ -13,4 +13,6 @@ public interface UtilisateurDAO {
 	
 	public void ajouterUtilisateur(Utilisateur utilisateur)  throws BusinessException;
 	
+	public boolean verifUnicitePseudoEmail(Utilisateur utilisateur) throws BusinessException;
+	
 }
