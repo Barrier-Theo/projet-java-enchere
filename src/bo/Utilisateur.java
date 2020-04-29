@@ -31,9 +31,8 @@ public class Utilisateur  {
     	this.nom = nom;
     }
     
-    public Utilisateur(Integer id,String pseudo, String nom, String prenom, String email, String telephone, String rue, 
+    public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, 
     		String codePostal,String ville, String motDePasse, Integer credit, Boolean isAdmin) {
-    	this.id = id;
     	this.pseudo = pseudo;
     	this.nom= nom;
     	this.prenom = prenom;

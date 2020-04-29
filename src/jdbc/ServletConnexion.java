@@ -35,7 +35,7 @@ public class ServletConnexion extends HttpServlet {
 			//Demande d'une connexion. La méthode getConnection met la demande en attente tant qu'il n'y a pas de connexion disponible
 			Connection cnx = dataSource.getConnection();
 			//Exploitation de la connexion
-			out.print("La connexion est "+ (cnx.isClosed()?"fermée":"ouverte")+".");
+			out.print("La connexion est "+ (cnx.isClosed()?"ferm�e":"ouverte")+".");
 			//Libération de la connexion. Elle n'est pas fermée mais remise dans le pool
 			cnx.close();
 		} catch (NamingException | SQLException e) {

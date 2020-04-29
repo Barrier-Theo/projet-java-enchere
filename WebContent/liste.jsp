@@ -39,9 +39,9 @@
 			</ul>
 		</div>	
 	</div>
-	
+
 	<a href="<%=request.getContextPath() %>/ServletProfil?idUser=${id}">Mon profil</a>
-		    
+
     <!-- Footer -->
     <footer class="row bg-dark footer-demodule fixed-bottom py-1">
             <div class="col-lg-4 offset-lg-4 text-center">
