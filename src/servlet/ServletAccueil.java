@@ -63,7 +63,7 @@ public class ServletAccueil extends HttpServlet {
 		Integer idUtilisateur = null ;
 		try {
 			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
-			request.setAttribute("id", idUtilisateur);
+			session.setAttribute("id", idUtilisateur);
 			request.setAttribute("pseudo", pseudo);
 			request.setAttribute("password", password);
 		
@@ -74,7 +74,7 @@ public class ServletAccueil extends HttpServlet {
 		if(idUtilisateur == null) {
 			rd = request.getRequestDispatcher("/connexion.jsp");
 		}else {
-			rd = request.getRequestDispatcher("/liste.jsp");
+			rd = request.getRequestDispatcher("/nouvelleVente.jsp");
 		}
 		rd.forward(request, response);
 
