@@ -17,8 +17,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		private static final String INSERT_UTILISATEUR="INSERT INTO UTILISATEURS VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 		private static final String SELECT_ALL="SELECT * FROM UTILISATEURS";
 		private static final String SELECT_BY_PSEUDO_PASSWORD="SELECT * FROM UTILISATEURS where pseudo = ? and mot_de_passe = ?";
-		private static final String SELECT_SPEUDO_EMAIL_UNICITE="SELECT * FROM UTILISATEURS;";
+		private static final String SELECT_SPEUDO_EMAIL_UNICITE="SELECT * FROM UTILISATEUR";
 		private static final String SELECT_BY_ID="SELECT * FROM UTILISATEURS where no_utilisateur = ?";
+		//On ne supprime pas son compte, on désactive son compte. (Possiblité de revenir un jour si dieu le veut)
+		private static final String UPDATE_UTILISATEUR_DESACTIVE="UPDATE UTILISATEURS SET isDelete = 1 WHERE no_utilisateur = ?";
+
 
 
 		@Override
@@ -233,4 +236,24 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw businessException;
 		}
 	}
+
+
+		@Override
+		public void supprimerUtilisateur(Integer id) throws BusinessException {
+			try(Connection cnx = ConnectionProvider.getConnection())
+			{
+				PreparedStatement pstmt = cnx.prepareStatement(UPDATE_UTILISATEUR_DESACTIVE);
+				pstmt.setInt(1, id);
+				pstmt.executeUpdate();
+				cnx.commit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.DESACTIVATION_UTILISATEUR);
+				throw businessException;
+			}
+		}
+
+		
+		
 }

@@ -104,4 +104,4 @@ SELECT * FROM UTILISATEURS where pseudo = 'tbarrier' and mot_de_passe = '123mdp'
 
 ALTER TABLE UTILISATEURS ADD isDelete BIT NOT NULL DEFAULT 0;
 
-ALTER TABLE UTILISATEURS  SET isDelete = 1 WHERE pseudo = "tbarrierd"
+UPDATE UTILISATEURS SET isDelete = 0 WHERE pseudo = "tbarrierd";

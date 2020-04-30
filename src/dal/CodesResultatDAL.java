@@ -18,4 +18,8 @@ public abstract class CodesResultatDAL {
 	
 	public static final int SELECT_USER=10004;
 	
+	public static final int DESACTIVATION_UTILISATEUR=10005;
+	
+	
+	
 }

@@ -20,7 +20,10 @@ import dal.UtilisateurDAOJdbcImpl;
 /**
  * Servlet implementation class ServletModifierProfil
  */
-@WebServlet("/ServletModifierProfil")
+@WebServlet(	urlPatterns= {
+		"/ServletModifierProfil",
+		"/supprimer"
+})
 public class ServletModifierProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,21 +39,25 @@ public class ServletModifierProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
-		String id = request.getParameter("idUser");
-		UtilisateurManager utilisateurManager;
+		String id = null;
+		UtilisateurManager utilisateurManager =  new UtilisateurManager();
+		id = request.getParameter("idUser");
 		List<Utilisateur> listeUtilisateur = new ArrayList<>();
-		
-		utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = utilisateurManager.selectUser(id);
 		listeUtilisateur.add(utilisateur);
 		request.setAttribute("listeUtilisateur", listeUtilisateur);
-		
+			
 		if(id == null) {
 			rd = request.getRequestDispatcher("/connexion.jsp");
 		}else {
 			rd = request.getRequestDispatcher("/modifierProfil.jsp");
 		}
-		rd.forward(request, response);
+			
+		
+		
+		
+		rd.forward(request, response);	
+		
 		
 	}
 

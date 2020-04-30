@@ -117,4 +117,12 @@ public class UtilisateurManager {
 
 		return utilisateur;
 	}
+	
+	public void supprimerUtilisateur(Integer id) throws BusinessException {
+		this.utilisateurDAO.supprimerUtilisateur(id);
+		
+	}
+
+
+	
 }

@@ -17,4 +17,6 @@ public interface UtilisateurDAO {
 	
 	public Utilisateur selectUser(String id) throws BusinessException;
 
+	public void supprimerUtilisateur(Integer id) throws BusinessException;
+
 }
