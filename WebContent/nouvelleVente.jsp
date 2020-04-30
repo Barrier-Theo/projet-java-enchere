@@ -90,21 +90,21 @@
 						<div class="form-group row">
 							<label class="col-sm-5 col-form-label ">&nbsp; Rue:</label>
 							<div class="col-sm-7">
-								<input class="form-control" name="rueArticle" value="${utilisateur.rue}">
+								<input required class="form-control" name="rueArticle" value="${utilisateur.rue}">
 							</div>
 						</div>
 						
 						<div class="form-group row">
 							<label class="col-sm-5 col-form-label ">&nbsp; Code Postal:</label>
 							<div class="col-sm-7">
-								<input class="form-control" name="codePostalArticle" value="${utilisateur.codePostal}">
+								<input required class="form-control" name="codePostalArticle" value="${utilisateur.codePostal}">
 							</div>
 						</div>
 						
 						<div class="form-group row">
 							<label class="col-sm-5 col-form-label ">&nbsp; Ville:</label>
 							<div class="col-sm-7">
-								<input class="form-control" name="villeArticle" value="${utilisateur.ville}">
+								<input required class="form-control" name="villeArticle" value="${utilisateur.ville}">
 							</div>
 						</div>
 					</c:forEach>
