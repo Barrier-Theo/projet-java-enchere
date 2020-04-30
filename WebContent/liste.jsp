@@ -40,7 +40,7 @@
 		</div>	
 	</div>
 	
-	<a href="<%=request.getContextPath() %>/profil">Mon profil</a>
+	<a href="<%=request.getContextPath() %>/ServletProfil?idUser=${id}">Mon profil</a>
 	
 		    
     <!-- Footer -->

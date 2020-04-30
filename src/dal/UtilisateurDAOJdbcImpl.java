@@ -18,6 +18,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		private static final String SELECT_ALL="SELECT * FROM UTILISATEURS";
 		private static final String SELECT_BY_PSEUDO_PASSWORD="SELECT * FROM UTILISATEURS where pseudo = ? and mot_de_passe = ?";
 		private static final String SELECT_SPEUDO_EMAIL_UNICITE="SELECT * FROM UTILISATEURS;";
+		private static final String SELECT_BY_ID="SELECT * FROM UTILISATEURS where no_utilisateur = ?";
 
 
 		@Override
@@ -174,5 +175,58 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			}
 			
 			return erreur;
-		}	
+		}
+		
+		@Override
+		public Utilisateur selectUser(String id) throws BusinessException {
+			if(id == null)
+			{
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+				throw businessException;
+			}
+			Utilisateur utilisateur = null;
+			
+			try(Connection cnx = ConnectionProvider.getConnection())
+			{
+				try
+				{
+				PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
+				pstmt.setString(1, id);
+				ResultSet rs = pstmt.executeQuery();
+
+				while (rs.next()){
+					utilisateur = new Utilisateur();
+					utilisateur.setId(rs.getInt("no_utilisateur"));
+					utilisateur.setPseudo(rs.getString("pseudo"));
+					utilisateur.setPrenom(rs.getString("prenom"));
+					utilisateur.setNom(rs.getString("nom"));
+					utilisateur.setEmail(rs.getString("email"));
+					utilisateur.setRue(rs.getString("rue"));
+					utilisateur.setTelephone(rs.getString("telephone"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
+					utilisateur.setVille(rs.getString("ville"));
+					utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				}
+				rs.close();
+				pstmt.close();
+				return utilisateur;
+				
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("erreur");
+				cnx.rollback();
+				throw e;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;
+		}
+	}
 }
