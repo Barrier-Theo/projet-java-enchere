@@ -11,7 +11,7 @@ import servlet.BusinessException;
 
 
 public class UtilisateurManager {
-	private BusinessException businessException = new BusinessException();
+	private BusinessException businessException;
 
 	private UtilisateurDAO utilisateurDAO;
 	
@@ -22,6 +22,7 @@ public class UtilisateurManager {
 	 */
 	public UtilisateurManager() {
 		this.utilisateurDAO=DAOFactory.getUtilisateurDAO();
+		this.businessException = new BusinessException();
 	}
 	
 	

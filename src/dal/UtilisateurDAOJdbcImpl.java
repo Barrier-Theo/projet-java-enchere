@@ -14,7 +14,7 @@ import servlet.BusinessException;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
-		private static final String INSERT_UTILISATEUR="INSERT INTO UTILISATEURS VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+		private static final String INSERT_UTILISATEUR="INSERT INTO UTILISATEURS VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 		private static final String SELECT_ALL="SELECT * FROM UTILISATEURS";
 		private static final String SELECT_BY_PSEUDO_PASSWORD="SELECT * FROM UTILISATEURS where pseudo = ? and mot_de_passe = ?";
 		private static final String SELECT_SPEUDO_EMAIL_UNICITE="SELECT * FROM UTILISATEURS;";
@@ -49,10 +49,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 		@Override
 		public Integer findIdByPseudoPassword(String pseudo, String password) throws BusinessException{
+
 			if(pseudo == null && password == null)
 			{
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+				businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_LISTE_ECHEC);
 				throw businessException;
 			}
 			
@@ -68,11 +69,12 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 					while(rs.next())
 					{	
 						idUtilisateur = rs.getInt("no_utilisateur");
+						if(rs.getBoolean("isDelete")) {
+							BusinessException businessException = new BusinessException();
+							businessException.ajouterErreur(CodesResultatDAL.COMPTE_DESACTIVE);
+							throw businessException;
+						}
 					}
-					
-				
-					
-					
 					rs.close();
 					pstmt.close();
 					return idUtilisateur;
@@ -90,7 +92,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			{
 				e.printStackTrace();
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.COMPTE_DESACTIVE);
 				throw businessException;
 			}
 		}
@@ -125,7 +127,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 						pstmt.setInt(10, utilisateur.getCredit());
 						//Conversion boolean to int pour bdd
 						Integer isAdmin = (!utilisateur.getIsAdmin()) ? 0 : 1;
-						pstmt.setInt(11, isAdmin);
+						Integer isDelete = (!utilisateur.getIsDelete()) ? 0 : 1;
+						pstmt.setInt(11, isDelete);
+						pstmt.setInt(12, isDelete);
 						pstmt.executeUpdate();
 						pstmt.close();
 					

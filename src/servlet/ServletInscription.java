@@ -55,7 +55,7 @@ public class ServletInscription extends HttpServlet {
 			request.setAttribute("erreurMdps","Les mots de passes ne sont pas identiques");
 		}
 		
-		Utilisateur nouvelUtilisateur = new Utilisateur(pseudo,nom,prenom,email,telephone, rue,codePostal,ville,password, 500, false);
+		Utilisateur nouvelUtilisateur = new Utilisateur(pseudo,nom,prenom,email,telephone, rue,codePostal,ville,password, 500, false, false);
 		UtilisateurManager utilisateurManager = new UtilisateurManager();	
 		try {
 			utilisateurManager.ajouterUtilisateur(nouvelUtilisateur);
