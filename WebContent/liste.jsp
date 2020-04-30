@@ -41,7 +41,7 @@
 	</div>
 	
 	<a href="<%=request.getContextPath() %>/ServletProfil?idUser=${id}">Mon profil</a>
-	
+	<a href="<%=request.getContextPath() %>/ServletNouvelArticleVendu">Nouvel Article</a>
 		    
     <!-- Footer -->
     <footer class="row bg-dark footer-demodule fixed-bottom py-1">

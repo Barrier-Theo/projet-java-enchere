@@ -47,11 +47,13 @@
 					<label class="col-sm-5 col-form-label">Catégorie</label>
 					<div class="col-sm-7">
 					  <select class="form-control" name="idCategorie">
-						<option>...</option>
+						<c:forEach items="${listeCategories}" var="uneCategorie">
+							<option>${uneCategorie.libelle}</option>
+						</c:forEach>
 					</select>
 					</div>
 				</div>
-			  
+				
 			  	<div class="form-group row">
 					<label class="col-sm-5 col-form-label">Mise à  prix</label>
 					<div class="col-sm-7">
@@ -84,27 +86,28 @@
 				<span class="border border-primary form-group row">
 					
 					<label class="col-sm-12 col-form-label">Retrait</label>
-					
+					<c:forEach items="${unUtilisateur}" var="utilisateur">
 						<div class="form-group row">
 							<label class="col-sm-5 col-form-label ">&nbsp; Rue:</label>
 							<div class="col-sm-7">
-								<input class="form-control" name="rueArticle">
+								<input class="form-control" name="rueArticle" value="${utilisateur.rue}">
 							</div>
 						</div>
 						
 						<div class="form-group row">
 							<label class="col-sm-5 col-form-label ">&nbsp; Code Postal:</label>
 							<div class="col-sm-7">
-								<input class="form-control" name="codePostalArticle">
+								<input class="form-control" name="codePostalArticle" value="${utilisateur.codePostal}">
 							</div>
 						</div>
 						
 						<div class="form-group row">
 							<label class="col-sm-5 col-form-label ">&nbsp; Ville:</label>
 							<div class="col-sm-7">
-								<input class="form-control" name="villeArticle">
+								<input class="form-control" name="villeArticle" value="${utilisateur.ville}">
 							</div>
 						</div>
+					</c:forEach>
 				</span>
 				
 				
