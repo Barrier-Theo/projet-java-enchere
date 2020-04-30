@@ -17,6 +17,7 @@ import bll.ArticlesVendusManager;
 import bll.CategoriesManager;
 import bll.UtilisateurManager;
 import bo.Categories;
+import bo.Retraits;
 import bo.Utilisateur;
 
 @WebServlet("/ServletNouvelArticleVendu")
@@ -80,7 +81,8 @@ public class ServletNouvelArticleVendu extends HttpServlet{
 		Integer idUtilisateur = (Integer)session.getAttribute("id");
 		
 		try {
-			articlesVendusManager.ajouterVente(request.getParameter("libelleArticle"), request.getParameter("descriptionArticle"), LocalDate.parse(request.getParameter("dateDebutArticle")), LocalDate.parse(request.getParameter("dateFinArticle")), Integer.parseInt(request.getParameter("prixDepartArticle")), 0, idUtilisateur, 1);
+			Retraits unRetrait = new Retraits(null, request.getParameter("rueArticle"), request.getParameter("codePostalArticle"), request.getParameter("villeArticle"));
+			articlesVendusManager.ajouterVente(request.getParameter("libelleArticle"), request.getParameter("descriptionArticle"), LocalDate.parse(request.getParameter("dateDebutArticle")), LocalDate.parse(request.getParameter("dateFinArticle")), Integer.parseInt(request.getParameter("prixDepartArticle")), 0, idUtilisateur, Integer.parseInt(request.getParameter("idCategorie")), unRetrait);
 			listeCategories = categoriesManager.selectAll();
 			request.setAttribute("listeCategories", listeCategories);
 			
@@ -92,7 +94,7 @@ public class ServletNouvelArticleVendu extends HttpServlet{
 		if(session.getAttribute("id").toString() == null) {
 			rd = request.getRequestDispatcher("/connexion.jsp");
 		}else {
-			rd = request.getRequestDispatcher("/nouvelleVente.jsp");
+			rd = request.getRequestDispatcher("/liste.jsp");
 		}
 		rd.forward(request, response);
 

@@ -3,6 +3,7 @@ package bll;
 import java.time.LocalDate;
 
 import bo.ArticlesVendus;
+import bo.Retraits;
 import dal.ArticlesVendusDAO;
 import dal.DAOFactory;
 import servlet.BusinessException;
@@ -18,14 +19,14 @@ public class ArticlesVendusManager {
 	}
 
 	public void ajouterVente(String libelleArticle, String descriptionArticle, LocalDate dateDebutArticle,
-			LocalDate dateFinArticle, Integer prixInitialArticle, Integer prixVenteArticle, Integer idUtilisateur, Integer idCategorie) throws BusinessException {
+			LocalDate dateFinArticle, Integer prixInitialArticle, Integer prixVenteArticle, Integer idUtilisateur, Integer idCategorie, Retraits unRetrait) throws BusinessException {
 
 		ArticlesVendus unNouvelArticleAVendre = new ArticlesVendus(null, libelleArticle, descriptionArticle, dateDebutArticle, dateFinArticle,
 				prixInitialArticle, prixVenteArticle, idUtilisateur, idCategorie);
 
 		if(!businessException.hasErreurs())
 		{
-			this.articlesVendusDAO.insert(unNouvelArticleAVendre);
+			this.articlesVendusDAO.insert(unNouvelArticleAVendre, unRetrait);
 		}
 
 		if(businessException.hasErreurs())
