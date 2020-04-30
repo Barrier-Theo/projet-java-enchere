@@ -65,16 +65,31 @@
             </tbody>
         </table>
 
-        <div class="row">
-            <div class="offset-1 col-4">
-                <a href="#"  class="btn btn-lg btn-primary btn-block margintop">Retour</a>
-            </div>
-            <div class="offset-2 col-4">
-                <c:forEach items="${listeUtilisateur}" var="u">			
-                	<a href="<%=request.getContextPath() %>/ServletModifierProfil?idUser=${u.id}" class="btn btn-lg btn-warning btn-block margintop">Modifier</a>
+        
+            
+                <c:forEach items="${listeUtilisateur}" var="u">		
+                
+	                <form class="form-signin" action="${pageContext.request.contextPath}/ServletModifierProfil" method="POST">
+	                
+	                	<div class="row">
+	                
+	                		<div class="col-6">
+                				<a href="#"  class="btn btn-lg btn-primary btn-block">Retour</a>
+            				</div>  
+				        
+							<div class="col-6">
+				      			<button class="btn btn-lg btn-warning btn-block" type="submit">Modifier</button>
+				  			</div>
+	                
+	                		<input type="text" class="form-control invisible" name="idUser" value="${id}">
+	                  
+				    	</div>
+				    
+				    </form>	
+			    
             	</c:forEach>
-            </div>
-        </div>
+            	
+        
 
     </div>
 

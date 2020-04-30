@@ -40,8 +40,15 @@
 		</div>	
 	</div>
 	
-	<a href="<%=request.getContextPath() %>/ServletProfil?idUser=${id}">Mon profil</a>
-	
+	<form class="form-signin" action="${pageContext.request.contextPath}/ServletProfil" method="POST">
+
+        <input type="text" class="form-control invisible" name="idUser" value="${id}">
+
+        <div class="row">
+            <div class="col-6 marginbottom">
+                <button class="btn btn-primary btn-block" type="submit">Mon profil</button>
+            </div>
+    </form>
 		    
     <!-- Footer -->
     <footer class="row bg-dark footer-demodule fixed-bottom py-1">

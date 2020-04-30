@@ -116,4 +116,24 @@ public class UtilisateurManager {
 
 		return utilisateur;
 	}
+	
+	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		this.verifUtilisateur(utilisateur);
+		boolean erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur); 
+		
+		if(erreur) {
+			this.businessException.ajouterErreur(CodesResultatBLL.SPEUDO_EMAIL_NON_UNIQUE);
+		}
+		
+		
+		if(!this.businessException.hasErreurs())
+		{
+			this.utilisateurDAO.modifierUtilisateur(utilisateur);
+		}
+		
+		if(this.businessException.hasErreurs())
+		{
+			throw this.businessException;
+		}
+	}
 }

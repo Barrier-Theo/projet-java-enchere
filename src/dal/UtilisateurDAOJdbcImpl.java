@@ -19,6 +19,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		private static final String SELECT_BY_PSEUDO_PASSWORD="SELECT * FROM UTILISATEURS where pseudo = ? and mot_de_passe = ?";
 		private static final String SELECT_SPEUDO_EMAIL_UNICITE="SELECT * FROM UTILISATEURS;";
 		private static final String SELECT_BY_ID="SELECT * FROM UTILISATEURS where no_utilisateur = ?";
+		private static final String MODIFIER_UTILISATEUR="UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?,"
+				+ "telephone = ?, rue = ?, code_postal = ?, ville = ?,mot_de_passe = ? WHERE no_utilisateur = ?;";
 
 
 		@Override
@@ -229,4 +231,55 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw businessException;
 		}
 	}
-}
+		
+		@Override
+		public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
+			if(utilisateur==null)
+			{
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+				throw businessException;
+			}
+			
+			try(Connection cnx = ConnectionProvider.getConnection())
+			{
+				try
+				{
+					cnx.setAutoCommit(false);
+					PreparedStatement pstmt;
+					ResultSet rs;
+						pstmt = cnx.prepareStatement(MODIFIER_UTILISATEUR);
+						pstmt.setString(1, utilisateur.getPseudo());
+						pstmt.setString(2, utilisateur.getNom());
+						pstmt.setString(3, utilisateur.getPrenom());
+						pstmt.setString(4, utilisateur.getEmail());
+						pstmt.setString(5, utilisateur.getTelephone());
+						pstmt.setString(6, utilisateur.getRue());
+						pstmt.setString(7, utilisateur.getCodePostal());
+						pstmt.setString(8, utilisateur.getVille());
+						pstmt.setString(9, utilisateur.getMotDePasse());
+						pstmt.setInt(10, utilisateur.getId());
+						//Conversion boolean to int pour bdd
+						pstmt.executeUpdate();
+						pstmt.close();
+					
+					cnx.commit();
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.out.println("erreur insert utilisateur");
+					cnx.rollback();
+					throw e;
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				throw businessException;
+			}
+			
+		}
+	}
