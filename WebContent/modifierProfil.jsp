@@ -121,7 +121,7 @@
 
                     <div class="form-group row">
                         <div class="col-sm-7">
-                            <input class="form-control invisible" name="idUser" value="${u.id}">
+                            <input class="form-control invisible">
                         </div>
                     </div>
 
