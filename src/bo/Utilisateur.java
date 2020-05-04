@@ -19,6 +19,7 @@ public class Utilisateur  {
     private String motDePasse;
     private Integer credit;
     private Boolean isAdmin;
+    private Boolean isDelete;
     
 
     public Utilisateur() {
@@ -31,7 +32,7 @@ public class Utilisateur  {
     }
     
     public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, 
-    		String codePostal,String ville, String motDePasse, Integer credit, Boolean isAdmin) {
+    		String codePostal,String ville, String motDePasse, Integer credit, Boolean isAdmin, Boolean isDelete) {
     	this.pseudo = pseudo;
     	this.nom= nom;
     	this.prenom = prenom;
@@ -43,6 +44,7 @@ public class Utilisateur  {
     	this.motDePasse = motDePasse;
     	this.credit = credit;
     	this.isAdmin = isAdmin;
+    	this.isDelete = isDelete; 
     }
     
     public Utilisateur(Integer id, String pseudo, String nom, String prenom, String email, String telephone, String rue, 

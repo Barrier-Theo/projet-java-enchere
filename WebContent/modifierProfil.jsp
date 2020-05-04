@@ -139,8 +139,11 @@
                 <div class="offset-3 col-3">
                     <button class="btn btn-lg btn-primary btn-block margintop" type="submit">Enregistrer</button>
                 </div>
-                <div class=" col-4">
-                    <button class="btn btn-lg btn-danger btn-block margintop" type="submit">Supprimer mon compte</button>
+                <!--  TODO 
+                		//test avec id en brut + get, Refacto en post.
+                 -->
+                <div class="col-4">
+                    <a class="btn btn-lg btn-danger btn-block margintop" href="${pageContext.request.contextPath}/ServletSupprimer?idUser=1011">Supprimer mon compte</a>
                 </div>
 
             </div>

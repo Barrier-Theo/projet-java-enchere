@@ -35,25 +35,15 @@ public class ServletModifierProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		RequestDispatcher rd = null;
-		String id = request.getParameter("idUser");
-		UtilisateurManager utilisateurManager;
+		HttpSession session = request.getSession();
+		Integer id = (Integer) session.getAttribute("id");
+		UtilisateurManager utilisateurManager =  new UtilisateurManager();
 		List<Utilisateur> listeUtilisateur = new ArrayList<>();
-		
-		utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = utilisateurManager.selectUser(id);
 		listeUtilisateur.add(utilisateur);
 		request.setAttribute("listeUtilisateur", listeUtilisateur);
-		
+
 		if(id == null) {
 			rd = request.getRequestDispatcher("/connexion.jsp");
 		}else {

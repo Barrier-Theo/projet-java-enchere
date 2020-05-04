@@ -11,7 +11,7 @@ import servlet.BusinessException;
 
 
 public class UtilisateurManager {
-	private BusinessException businessException = new BusinessException();
+	private BusinessException businessException;
 
 	private UtilisateurDAO utilisateurDAO;
 	
@@ -22,6 +22,7 @@ public class UtilisateurManager {
 	 */
 	public UtilisateurManager() {
 		this.utilisateurDAO=DAOFactory.getUtilisateurDAO();
+		this.businessException = new BusinessException();
 	}
 	
 	
@@ -102,7 +103,7 @@ public class UtilisateurManager {
 		}
 	}
 	
-	public Utilisateur selectUser(String id) {
+	public Utilisateur selectUser(Integer id) {
 		// TODO Auto-generated method stub
 		
 		Utilisateur utilisateur = new Utilisateur();
@@ -116,30 +117,38 @@ public class UtilisateurManager {
 
 		return utilisateur;
 	}
-	
+
 	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		this.verifUtilisateur(utilisateur);
 		boolean erreur = false;
-		
+
 		String pseudoDb = this.utilisateurDAO.getPseudoFromDb(utilisateur.getId());
 		// TODO VERIF EMAIL ||
 		if(!utilisateur.getPseudo().equals(pseudoDb)){
-			 erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur); 
+			 erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur);
 		}
-		
+
 		if(erreur) {
 			this.businessException.ajouterErreur(CodesResultatBLL.SPEUDO_EMAIL_NON_UNIQUE);
 		}
-		
-		
+
+
 		if(!this.businessException.hasErreurs())
 		{
 			this.utilisateurDAO.modifierUtilisateur(utilisateur);
 		}
-		
+
 		if(this.businessException.hasErreurs())
 		{
 			throw this.businessException;
 		}
 	}
+
+	public void supprimerUtilisateur(Integer id) throws BusinessException {
+		this.utilisateurDAO.supprimerUtilisateur(id);
+
+	}
+
+
+
 }

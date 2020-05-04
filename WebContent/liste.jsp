@@ -40,16 +40,10 @@
 		</div>	
 	</div>
 	
-	<form class="form-signin" action="${pageContext.request.contextPath}/ServletProfil" method="POST">
+	<a href="<%=request.getContextPath() %>/ServletProfil?idUser=${id}">Mon profil</a>
+	<a href="<%=request.getContextPath() %>/ServletNouvelArticleVendu">Nouvel Article</a>
+	<a href="<%=request.getContextPath() %>/deconnexion">Deconnexion</a>
 
-        <input type="text" class="form-control invisible" name="idUser" value="${id}">
-
-        <div class="row">
-            <div class="col-6 marginbottom">
-                <button class="btn btn-primary btn-block" type="submit">Mon profil</button>
-            </div>
-    </form>
-		    
     <!-- Footer -->
     <footer class="row bg-dark footer-demodule fixed-bottom py-1">
             <div class="col-lg-4 offset-lg-4 text-center">

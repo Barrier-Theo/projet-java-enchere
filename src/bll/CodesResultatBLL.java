@@ -20,10 +20,5 @@ public abstract class CodesResultatBLL {
 	public static final int IDENTIFIANTS_INCORRECTES=20009;
 	public static final int SPEUDO_EMAIL_NON_UNIQUE=20010;
 	
-	
-
-
-
-
 }
 

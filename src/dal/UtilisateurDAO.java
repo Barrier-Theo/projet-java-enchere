@@ -15,10 +15,12 @@ public interface UtilisateurDAO {
 	
 	public boolean verifUnicitePseudoEmail(Utilisateur utilisateur) throws BusinessException;
 	
-	public Utilisateur selectUser(String id) throws BusinessException;
+	public Utilisateur selectUser(Integer id) throws BusinessException;
 	
 	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException;
 
 	public String getPseudoFromDb(Integer id) throws BusinessException;;
+
+	public void supprimerUtilisateur(Integer id) throws BusinessException;
 
 }
