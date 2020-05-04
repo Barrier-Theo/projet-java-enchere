@@ -119,7 +119,13 @@ public class UtilisateurManager {
 	
 	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		this.verifUtilisateur(utilisateur);
-		boolean erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur); 
+		boolean erreur = false;
+		
+		String pseudoDb = this.utilisateurDAO.getPseudoFromDb(utilisateur.getId());
+		
+		if(utilisateur.getPseudo() != pseudoDb){
+			 erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur); 
+		}
 		
 		if(erreur) {
 			this.businessException.ajouterErreur(CodesResultatBLL.SPEUDO_EMAIL_NON_UNIQUE);

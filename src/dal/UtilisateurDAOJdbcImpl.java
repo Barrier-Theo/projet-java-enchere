@@ -21,6 +21,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		private static final String SELECT_BY_ID="SELECT * FROM UTILISATEURS where no_utilisateur = ?";
 		private static final String MODIFIER_UTILISATEUR="UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?,"
 				+ "telephone = ?, rue = ?, code_postal = ?, ville = ?,mot_de_passe = ? WHERE no_utilisateur = ?;";
+		private static final String SELECT_PSEUDO_BY_ID="SELECT * FROM UTILISATEURS where no_utilisateur = ?";
+
+		
 
 
 		@Override
@@ -281,5 +284,13 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				throw businessException;
 			}
 			
+		}
+
+
+		@Override
+		public String getPseudoFromDb(Integer id) throws BusinessException {
+			String idS =  Integer.toString(id);
+			Utilisateur utilisateur = this.selectUser(idS);
+			return utilisateur.getPseudo();
 		}
 	}

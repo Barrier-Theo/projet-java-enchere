@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="messages.LecteurMessage" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -69,7 +70,7 @@
                     <div class="form-group row">
                         <label for="inputCp" class="col-sm-5 col-form-label">Code Postal :</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="inputCp" name="codeP" value="${u.codePostal}" required>
+                            <input type="text" class="form-control" id="inputCp" name="codePostal" value="${u.codePostal}" required>
                         </div>
                     </div>
 

@@ -38,7 +38,7 @@ public class ServletModificationProfil extends HttpServlet {
 		Map params = request.getParameterMap();
 			
 		String pseudo =  request.getParameter("pseudo");
-		String password= request.getParameter("password");
+		String password= request.getParameter("mdpactuel");
 		String nom = request.getParameter("nom");
 		String prenom   = request.getParameter("prenom");
 		String email =  request.getParameter("email");

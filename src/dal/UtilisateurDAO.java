@@ -19,4 +19,6 @@ public interface UtilisateurDAO {
 	
 	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException;
 
+	public String getPseudoFromDb(Integer id) throws BusinessException;;
+
 }
