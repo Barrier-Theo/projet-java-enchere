@@ -66,7 +66,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 			session.setAttribute("id", idUtilisateur);
 			request.setAttribute("pseudo", pseudo);
 			request.setAttribute("password", password);
-			rd = request.getRequestDispatcher("/liste.jsp");
+			rd = request.getRequestDispatcher("/accueil.jsp");
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());

@@ -1,14 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="messages.LecteurMessage" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="fr">
 
 <head>
   <meta charset="UTF-8">
 
-    <title>Nouvelle Vente</title>
+    <title>Accueil</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -36,12 +39,33 @@
 
 
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">ENI-Enchères</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Enchères <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath() %>/ServletNouvelArticleVendu">Vendre un article</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<%=request.getContextPath() %>/ServletProfil?idUser=${id}">Mon profil</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Déconnexion</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
 	<div class="container">
 	  <div class="row">
-		<div class="col">
-		<center>
+		<div class="col" style="text-align:center">
 			<h3>Liste des enchères</h3>
-		</center>
 		</div>
 	  </div>
 	  <div class="row">
@@ -107,3 +131,5 @@
 </body>
 
 </html>
+
+
