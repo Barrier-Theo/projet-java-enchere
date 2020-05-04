@@ -259,7 +259,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 						pstmt.setString(8, utilisateur.getVille());
 						pstmt.setString(9, utilisateur.getMotDePasse());
 						pstmt.setInt(10, utilisateur.getId());
-						//Conversion boolean to int pour bdd
 						pstmt.executeUpdate();
 						pstmt.close();
 					
@@ -268,7 +267,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				catch(Exception e)
 				{
 					e.printStackTrace();
-					System.out.println("erreur insert utilisateur");
+					System.out.println("erreur modification utilisateur");
 					cnx.rollback();
 					throw e;
 				}

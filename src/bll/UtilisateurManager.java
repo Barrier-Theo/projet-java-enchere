@@ -119,17 +119,17 @@ public class UtilisateurManager {
 	
 	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		this.verifUtilisateur(utilisateur);
-		boolean erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur); 
+		//boolean erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur); 
 		
-		if(erreur) {
-			this.businessException.ajouterErreur(CodesResultatBLL.SPEUDO_EMAIL_NON_UNIQUE);
-		}
+		//if(erreur) {
+		//	this.businessException.ajouterErreur(CodesResultatBLL.SPEUDO_EMAIL_NON_UNIQUE);
+		//}
 		
 		
-		if(!this.businessException.hasErreurs())
-		{
+		//if(!this.businessException.hasErreurs())
+		//{
 			this.utilisateurDAO.modifierUtilisateur(utilisateur);
-		}
+		//}
 		
 		if(this.businessException.hasErreurs())
 		{

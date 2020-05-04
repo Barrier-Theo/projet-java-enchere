@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bll.UtilisateurManager;
 import bo.Utilisateur;
@@ -34,7 +35,8 @@ public class ServletModificationProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Lecture des parametres apr�s soumission du formulaire
 		RequestDispatcher rd = null;
-		String id = request.getParameter("idUser");
+		HttpSession session = request.getSession();
+		Integer id = (Integer) session.getAttribute("id");
 		Map params = request.getParameterMap();
 			
 		String pseudo =  request.getParameter("pseudo");
@@ -53,7 +55,7 @@ public class ServletModificationProfil extends HttpServlet {
 			request.setAttribute("erreurMdps","Les mots de passes ne sont pas identiques");
 		}
 		
-		Utilisateur utilisateur = new Utilisateur(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,password, 500, false);
+		Utilisateur utilisateur = new Utilisateur(id, pseudo,nom,prenom,email,telephone,rue,codePostal,ville,password, 500, false);
 		UtilisateurManager utilisateurManager = new UtilisateurManager();	
 		try {
 			utilisateurManager.modifierUtilisateur(utilisateur);

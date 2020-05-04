@@ -72,6 +72,8 @@
 	                <form class="form-signin" action="${pageContext.request.contextPath}/ServletModifierProfil" method="POST">
 	                
 	                	<div class="row">
+	                	
+	                	<input type="text" class="form-control invisible" name="idUser" value="${id}">
 	                
 	                		<div class="col-6">
                 				<a href="#"  class="btn btn-lg btn-primary btn-block">Retour</a>
@@ -81,7 +83,7 @@
 				      			<button class="btn btn-lg btn-warning btn-block" type="submit">Modifier</button>
 				  			</div>
 	                
-	                		<input type="text" class="form-control invisible" name="idUser" value="${id}">
+	              
 	                  
 				    	</div>
 				    
