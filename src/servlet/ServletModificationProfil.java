@@ -35,6 +35,7 @@ public class ServletModificationProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Lecture des parametres apr�s soumission du formulaire
 		RequestDispatcher rd = null;
+		
 		HttpSession session = request.getSession();
 		Integer id = (Integer) session.getAttribute("id");
 		Map params = request.getParameterMap();
@@ -51,13 +52,23 @@ public class ServletModificationProfil extends HttpServlet {
 		String newpassword = request.getParameter("nouveaumdp");
 		String newpasswordCfm = request.getParameter("confirmation");
 		
-		if(!newpassword.equals(newpasswordCfm)) {
-			request.setAttribute("erreurMdps","Les mots de passes ne sont pas identiques");
-		}
+		
+		
+		
+		
 		
 		Utilisateur utilisateur = new Utilisateur(id, pseudo,nom,prenom,email,telephone,rue,codePostal,ville,password, 500, false);
 		UtilisateurManager utilisateurManager = new UtilisateurManager();	
 		try {
+			if(newpassword.trim().isEmpty() == false || newpasswordCfm.trim().isEmpty() == false) {
+				if(!newpassword.equals(newpasswordCfm)) {
+					request.setAttribute("erreurMdps","Les mots de passes ne sont pas identiques");
+				}else {
+					utilisateur.setMotDePasse(newpassword);
+				}
+				
+			}
+			
 			utilisateurManager.modifierUtilisateur(utilisateur);
 			//TODO definir sur page d'accueil.
 			rd = request.getRequestDispatcher("/liste.jsp");

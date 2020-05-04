@@ -122,8 +122,8 @@ public class UtilisateurManager {
 		boolean erreur = false;
 		
 		String pseudoDb = this.utilisateurDAO.getPseudoFromDb(utilisateur.getId());
-		
-		if(utilisateur.getPseudo() != pseudoDb){
+		// TODO VERIF EMAIL ||
+		if(!utilisateur.getPseudo().equals(pseudoDb)){
 			 erreur = this.utilisateurDAO.verifUnicitePseudoEmail(utilisateur); 
 		}
 		
