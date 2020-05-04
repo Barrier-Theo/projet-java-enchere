@@ -21,6 +21,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		private static final String SELECT_BY_ID="SELECT * FROM UTILISATEURS where no_utilisateur = ?";
 		//On ne supprime pas son compte, on désactive son compte. (Possiblité de revenir un jour si dieu le veut)
 		private static final String UPDATE_UTILISATEUR_DESACTIVE="UPDATE UTILISATEURS SET isDelete = 1 WHERE no_utilisateur = ?";
+		private static final String MODIFIER_UTILISATEUR="UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?,"
+				+ "telephone = ?, rue = ?, code_postal = ?, ville = ?,mot_de_passe = ? WHERE no_utilisateur = ?;";
+
 
 
 
@@ -184,7 +187,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 		@Override
-		public Utilisateur selectUser(String id) throws BusinessException {
+		public Utilisateur selectUser(Integer id) throws BusinessException {
 			if(id == null)
 			{
 				BusinessException businessException = new BusinessException();
@@ -198,7 +201,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				try
 				{
 				PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_ID);
-				pstmt.setString(1, id);
+				pstmt.setInt(1, id);
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()){
@@ -252,10 +255,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				throw businessException;
 			}
 		}
-
-
-
-}
 
 		@Override
 		public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {

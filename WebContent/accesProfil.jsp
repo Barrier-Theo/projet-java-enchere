@@ -72,10 +72,9 @@
 	                <form class="form-signin" action="${pageContext.request.contextPath}/ServletModifierProfil" method="POST">
 	                
 	                	<div class="row">
-	                	
-	                	<input type="text" class="form-control invisible" name="idUser" value="${id}">
 	                
 	                		<div class="col-6">
+	                			<!-- TODO  A définir sur page d'accueil liste d'enchere -->
                 				<a href="#"  class="btn btn-lg btn-primary btn-block">Retour</a>
             				</div>  
 				        

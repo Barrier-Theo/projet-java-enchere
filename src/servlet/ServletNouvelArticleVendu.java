@@ -40,7 +40,7 @@ public class ServletNouvelArticleVendu extends HttpServlet{
 
 		HttpSession session = request.getSession();
 		
-		String idUtilisateur = session.getAttribute("id").toString();
+		Integer idUtilisateur = (Integer) session.getAttribute("id");
 		
 		CategoriesManager categoriesManager = new CategoriesManager();
 		List<Categories> listeCategories = new ArrayList<>();
