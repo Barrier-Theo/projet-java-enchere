@@ -20,10 +20,7 @@ import dal.UtilisateurDAOJdbcImpl;
 /**
  * Servlet implementation class ServletModifierProfil
  */
-@WebServlet(	urlPatterns= {
-		"/ServletModifierProfil",
-		"/supprimer"
-})
+@WebServlet("/ServletModifierProfil")
 public class ServletModifierProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,55 +36,25 @@ public class ServletModifierProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
-		String id = null;
+		HttpSession session = request.getSession();
+		Integer id = (Integer) session.getAttribute("id");
 		UtilisateurManager utilisateurManager =  new UtilisateurManager();
-		id = request.getParameter("idUser");
 		List<Utilisateur> listeUtilisateur = new ArrayList<>();
 		Utilisateur utilisateur = utilisateurManager.selectUser(id);
 		listeUtilisateur.add(utilisateur);
 		request.setAttribute("listeUtilisateur", listeUtilisateur);
-			
+
 		if(id == null) {
 			rd = request.getRequestDispatcher("/connexion.jsp");
 		}else {
 			rd = request.getRequestDispatcher("/modifierProfil.jsp");
 		}
-			
-		
-		
-		
-		rd.forward(request, response);	
-		
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		RequestDispatcher rd = null;
-		HttpSession session = request.getSession();
-		String pseudo = request.getParameter("pseudo");
-		String password = request.getParameter("password");
-		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		Integer idUtilisateur = null ;
-		try {
-			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
-			request.setAttribute("id", idUtilisateur);
-			request.setAttribute("pseudo", pseudo);
-			request.setAttribute("password", password);
-		
-		}catch(BusinessException e) {
-			e.printStackTrace();
-			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-		}
-		if(idUtilisateur == null) {
-			rd = request.getRequestDispatcher("/connexion.jsp");
-		}else {
-			rd = request.getRequestDispatcher("/accesProfil.jsp");
-		}
 		rd.forward(request, response);
+
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 
 	}
 

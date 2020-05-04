@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bll.UtilisateurManager;
 
@@ -30,13 +31,13 @@ public class ServletSupprimer extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("idUser");
+		HttpSession session = request.getSession();
+		Integer id = (Integer) session.getAttribute("id");
 		RequestDispatcher rd = null;
-		Integer identifant = Integer.parseInt(id);
 		UtilisateurManager utilisateurManager =  new UtilisateurManager();
 
 		try {
-			utilisateurManager.supprimerUtilisateur(identifant);
+			utilisateurManager.supprimerUtilisateur(id);
 			rd = request.getRequestDispatcher("/ServletInscription");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
