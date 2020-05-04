@@ -94,7 +94,7 @@ public class ServletNouvelArticleVendu extends HttpServlet{
 		if(session.getAttribute("id").toString() == null) {
 			rd = request.getRequestDispatcher("/connexion.jsp");
 		}else {
-			rd = request.getRequestDispatcher("/liste.jsp");
+			rd = request.getRequestDispatcher("/accueil.jsp");
 		}
 		rd.forward(request, response);
 
