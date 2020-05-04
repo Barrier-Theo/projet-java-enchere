@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import bll.ArticlesVendusManager;
 import bll.UtilisateurManager;
+import bo.ArticlesVendus;
 import bo.Utilisateur;
 
 /**
@@ -57,15 +59,18 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		// TODO Auto-generated method stub
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
+		ArticlesVendusManager listeArticleManager = new ArticlesVendusManager();
+		
+		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Integer idUtilisateur = null;
 		try {
 			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
+			List<ArticlesVendus> listeArticles = listeArticleManager.selectAll();
+			request.setAttribute("listeArticle", listeArticles);
 			session.setAttribute("id", idUtilisateur);
-			request.setAttribute("pseudo", pseudo);
-			request.setAttribute("password", password);
 			rd = request.getRequestDispatcher("/accueil.jsp");
 		}catch(BusinessException e) {
 			e.printStackTrace();

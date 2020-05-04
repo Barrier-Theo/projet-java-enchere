@@ -121,9 +121,20 @@
 			<br/> 
 			<button type="button" class="btn btn-primary btn-lg">Rechercher</button>
 		</div>
-		<div class="col">
-
+		<div class="col-6">
+	
 		</div>
+		<c:forEach items="${listeArticle}" var="unArticle">
+			
+			<div class="col-6">
+				<br/>
+				<u><h5>${unArticle.nomArticle}</h5></u>
+				<br/>
+				<p>Prix : ${unArticle.miseAPrix} </p>
+				<p> Fin de l'enchère : ${unArticle.dateFinEncheres} </p>
+				<p> Vendeur : ${unArticle.noUtilisateur} </p>
+			</div>
+		</c:forEach>
 		
 	  </div>
 	  
