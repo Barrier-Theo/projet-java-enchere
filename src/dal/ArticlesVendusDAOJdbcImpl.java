@@ -3,6 +3,8 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import bo.ArticlesVendus;
 import bo.Retraits;
@@ -12,6 +14,32 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 
 	private static final String INSERT_ARTICLES_VENDUS="INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?)";
 	private static final String INSERT_RETRAIT="INSERT INTO RETRAITS VALUES(?,?,?,?)";
+	private static final String SELECT_ALL="SELECT * FROM ARTICLES_VENDUS";
+	
+	@Override
+	public List<ArticlesVendus> selectAll() throws BusinessException {
+		List<ArticlesVendus> listeArticles = new ArrayList<ArticlesVendus>();
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next())
+			{
+				listeArticles.add(new ArticlesVendus(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie")));
+			}
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_LISTE_ECHEC);
+			throw businessException;
+		}
+		
+		return listeArticles;
+	}
 
 	public void insert(ArticlesVendus unArticleVendu, Retraits unRetrait) throws BusinessException {
 		if(unArticleVendu==null)
