@@ -29,6 +29,7 @@
 
 <body>
 
+
 	<div class="container">
 		<div class="row">
 			<ul class="list-group col-12">
@@ -42,7 +43,8 @@
 	
 	<a href="<%=request.getContextPath() %>/ServletProfil?idUser=${id}">Mon profil</a>
 	<a href="<%=request.getContextPath() %>/ServletNouvelArticleVendu">Nouvel Article</a>
-		    
+	<a href="<%=request.getContextPath() %>/deconnexion">Deconnexion</a>
+	   
     <!-- Footer -->
     <footer class="row bg-dark footer-demodule fixed-bottom py-1">
             <div class="col-lg-4 offset-lg-4 text-center">
