@@ -20,7 +20,8 @@
 
     <div class="container-fluid">
         <div class="row">
-
+		<c:forEach items="${listeArticle}" var="a">
+			
             <div class="col-4">
                 <div class="">
                     <img src="https://via.placeholder.com/350" align="right" class="img-fluid" alt="Responsive image">
@@ -41,11 +42,11 @@
                             </tr>
                             <tr>
                                 <td><b>Description :</b></td>
-                                <td>sdsdsd sd sds ds ds d sd sd s ds d sd s ds d s</td>
+                                <td>${a.description}</td>
                             </tr>
                             <tr>
                                 <td><b>Catégorie :</b></td>
-                                <td>Informatique</td>
+                                <td>${a.noCategorie}</td>
                             </tr>
                             <tr>
                                 <td><b>Meilleur offre :</b></td>
@@ -78,16 +79,16 @@
                             </tr>
                         </tbody>
                     </table>
-
+				
                     <!--<div class="row">
                         <div class="offset-1 col-4">
                             <button class="btn btn-lg btn-primary btn-block margintop" type="submit">Retour</button>
                         </div>
                     </div>-->
-
+			
                 </div>
             </div>
-
+			</c:forEach>
         </div>
     </div>
 

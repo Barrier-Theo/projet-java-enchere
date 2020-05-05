@@ -18,6 +18,7 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 	private static final String INSERT_RETRAIT="INSERT INTO RETRAITS VALUES(?,?,?,?)";
 	private static final String SELECT_ALL="SELECT * FROM ARTICLES_VENDUS";
 	private static final String SELECT_ARTICLE_BY_ID="SELECT * FROM ARTICLES_VENDUS where no_article = ?";
+	private static final String INSERT_ENCHERE="INSERT INTO ENCHERES VALUES(?,?,?,?)";
 
 	
 	
@@ -101,6 +102,30 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 				pstmt.setString(2, unRetrait.getRue());
 				pstmt.setString(3, unRetrait.getCodePostal());
 				pstmt.setString(4, unRetrait.getVille());
+
+				pstmt.executeUpdate();
+				pstmt.close();
+
+				cnx.commit();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("erreur insert retrait");
+				cnx.rollback();
+				throw e;
+			}
+			
+			
+			try
+			{
+				cnx.setAutoCommit(false);
+				PreparedStatement pstmt;
+				pstmt = cnx.prepareStatement(INSERT_ENCHERE);
+				pstmt.setInt(1, unArticleVendu.getNoUtilisateur());
+				pstmt.setInt(2, unArticleVendu.getNoArticle());
+				pstmt.setString(3, unArticleVendu.getDateFinEncheres().toString());
+				pstmt.setInt(4, 0);
 
 				pstmt.executeUpdate();
 				pstmt.close();
