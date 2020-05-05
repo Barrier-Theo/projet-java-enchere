@@ -8,43 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import bll.UtilisateurManager;
 
 /**
- * Servlet implementation class ServletSupprimer
+ * Servlet implementation class ServletRedirectForm
  */
-@WebServlet("/ServletSupprimer")
-public class ServletSupprimer extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletSupprimer() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+@WebServlet("/ServletRedirectForm")
+public class ServletRedirectForm extends HttpServlet {
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Integer id = (Integer) session.getAttribute("id");
 		RequestDispatcher rd = null;
-		UtilisateurManager utilisateurManager =  new UtilisateurManager();
-
-		try {
-			utilisateurManager.supprimerUtilisateur(id);
-			rd = request.getRequestDispatcher("/ServletInscription");
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		rd = request.getRequestDispatcher("/ServletAccueil");
 		rd.forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

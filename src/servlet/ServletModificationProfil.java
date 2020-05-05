@@ -66,7 +66,7 @@ public class ServletModificationProfil extends HttpServlet {
 			
 			utilisateurManager.modifierUtilisateur(utilisateur);
 			//TODO definir sur page d'accueil.
-			rd = request.getRequestDispatcher("WEB-INF/ServletProfil");
+			rd = request.getRequestDispatcher("/ServletProfil");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			rd = request.getRequestDispatcher("WEB-INF/modifierProfil.jsp");
