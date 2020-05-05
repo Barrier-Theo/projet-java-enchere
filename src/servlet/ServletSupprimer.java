@@ -38,7 +38,7 @@ public class ServletSupprimer extends HttpServlet {
 
 		try {
 			utilisateurManager.supprimerUtilisateur(id);
-			rd = request.getRequestDispatcher("/ServletInscription");
+			rd = request.getRequestDispatcher("WEB-INF/ServletInscription");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

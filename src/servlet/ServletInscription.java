@@ -60,10 +60,10 @@ public class ServletInscription extends HttpServlet {
 		try {
 			utilisateurManager.ajouterUtilisateur(nouvelUtilisateur);
 			//TODO definir sur page d'accueil.
-			rd = request.getRequestDispatcher("/connexion.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
-			rd = request.getRequestDispatcher("/inscription.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/inscription.jsp");
 			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 		}
 		

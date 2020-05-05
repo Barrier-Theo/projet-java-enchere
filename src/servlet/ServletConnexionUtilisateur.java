@@ -38,7 +38,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		try {
 			List<Utilisateur> listes = listeManager.selectAll();
 			request.setAttribute("listes", listes);
-			rd = request.getRequestDispatcher("/connexion.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 			rd.forward(request, response);
 		}catch(BusinessException e) {
 			e.printStackTrace();
@@ -67,7 +67,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-			rd = request.getRequestDispatcher("/connexion.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 
 		}
 		rd.forward(request, response);

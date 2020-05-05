@@ -75,7 +75,7 @@
 	                
 	                		<div class="col-6">
 	                			<!-- TODO  A définir sur page d'accueil liste d'enchere -->
-                				<a href="#"  class="btn btn-lg btn-primary btn-block">Retour</a>
+                				<a href="<%=request.getContextPath() %>/ServletAccueil"  class="btn btn-lg btn-primary btn-block">Retour</a>
             				</div>  
 				        
 							<div class="col-6">

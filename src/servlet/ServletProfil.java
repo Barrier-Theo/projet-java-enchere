@@ -47,9 +47,9 @@ public class ServletProfil extends HttpServlet {
 		request.setAttribute("listeUtilisateur", listeUtilisateur);
 		
 		if(id == null) {
-			rd = request.getRequestDispatcher("/connexion.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 		}else {
-			rd = request.getRequestDispatcher("/accesProfil.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/accesProfil.jsp");
 		}
 		rd.forward(request, response);
 	}

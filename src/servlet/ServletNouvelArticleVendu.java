@@ -61,7 +61,7 @@ public class ServletNouvelArticleVendu extends HttpServlet{
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 		}
 		
-		rd = request.getRequestDispatcher("/nouvelleVente.jsp");
+		rd = request.getRequestDispatcher("WEB-INF/nouvelleVente.jsp");
 		rd.forward(request, response);
 
 
@@ -92,9 +92,9 @@ public class ServletNouvelArticleVendu extends HttpServlet{
 		}
 		
 		if(session.getAttribute("id").toString() == null) {
-			rd = request.getRequestDispatcher("/connexion.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 		}else {
-			rd = request.getRequestDispatcher("/accueil.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/accueil.jsp");
 		}
 		rd.forward(request, response);
 

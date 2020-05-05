@@ -72,14 +72,14 @@ body {
     width: 100%;
     max-width: 600px;
     padding: 15px;
-    margin-right: 50px;
+    margin: 0 auto;
 }
 
 .enchere {
     width: 100%;
     max-width: 700px;
     padding: 15px;
-    margin: 0 auto;
+    margin-right: 50px;
 }
 
 .image {

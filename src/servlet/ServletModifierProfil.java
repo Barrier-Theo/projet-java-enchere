@@ -45,9 +45,9 @@ public class ServletModifierProfil extends HttpServlet {
 		request.setAttribute("listeUtilisateur", listeUtilisateur);
 
 		if(id == null) {
-			rd = request.getRequestDispatcher("/connexion.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 		}else {
-			rd = request.getRequestDispatcher("/modifierProfil.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/modifierProfil.jsp");
 		}
 		rd.forward(request, response);
 

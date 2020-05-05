@@ -59,11 +59,11 @@ public class ServletAccueil extends HttpServlet {
 			request.setAttribute("listeArticle", listeArticles);
 			listeCategories = categoriesManager.selectAll();
 			request.setAttribute("listeCategories", listeCategories);
-			rd = request.getRequestDispatcher("/accueil.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/accueil.jsp");
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-			rd = request.getRequestDispatcher("/connexion.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 
 		}
 		rd.forward(request, response);

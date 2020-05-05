@@ -56,7 +56,7 @@
 					<a class="nav-link" href="<%=request.getContextPath() %>/ServletProfil">Mon profil</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Déconnexion</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/deconnexion">Déconnexion</a>
 				</li>
 			</ul>
 		</div>
