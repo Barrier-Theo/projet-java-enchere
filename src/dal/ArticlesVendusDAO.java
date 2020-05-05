@@ -12,4 +12,6 @@ public interface ArticlesVendusDAO {
 
 	public List<ArticlesVendus> selectAll() throws BusinessException;
 
+	public ArticlesVendus selectArticleById(Integer id) throws BusinessException;
+
 }

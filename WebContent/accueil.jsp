@@ -128,7 +128,7 @@
 			
 			<div class="col-6">
 				<br/>
-				<u><h5>${unArticle.nomArticle}</h5></u>
+				<u><a href="${pageContext.request.contextPath}/article?id=${unArticle.noArticle}"><h5> ${unArticle.nomArticle}</h5></u></a>
 				<br/>
 				<p>Prix : ${unArticle.miseAPrix} </p>
 				<p> Fin de l'enchère : ${unArticle.dateFinEncheres} </p>
