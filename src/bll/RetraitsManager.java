@@ -1,5 +1,6 @@
 package bll;
 
+import bo.Retraits;
 import dal.DAOFactory;
 import dal.RetraitsDAO;
 import servlet.BusinessException;
@@ -12,5 +13,9 @@ public class RetraitsManager {
 	
 	public RetraitsManager() {
 		this.retraitsDAO=DAOFactory.getRetraitsDAO();
+	}
+	
+	public Retraits selectRetraitByIdArticle(Integer noArticle) throws BusinessException {
+		return 	this.retraitsDAO.selectRetraitByIdArticle(noArticle);
 	}
 }

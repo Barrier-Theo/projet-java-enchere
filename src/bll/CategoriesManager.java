@@ -18,4 +18,8 @@ public class CategoriesManager {
 	public List<Categories> selectAll() throws BusinessException{
 		return this.categoriesDAO.selectAll();
 	}
+
+	public Categories selectCategorieById(Integer noCategorie)  throws BusinessException{
+		return this.categoriesDAO.selectCategorieById(noCategorie);
+	}
 }

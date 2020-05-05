@@ -178,7 +178,7 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 					article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					article.setMiseAPrix(rs.getInt("prix_initial"));
 					article.setPrixVente(rs.getInt("prix_vente"));
-					article.setNoCategorie(rs.getInt("no_utilisateur"));
+					article.setNoUtilisateur(rs.getInt("no_utilisateur"));
 					article.setNoCategorie(rs.getInt("no_categorie"));
 				}
 				rs.close();

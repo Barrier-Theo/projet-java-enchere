@@ -9,6 +9,8 @@ import servlet.BusinessException;
 public interface CategoriesDAO {
 
 	public List<Categories> selectAll() throws BusinessException;
+ 
+	public Categories selectCategorieById(Integer noCategorie) throws BusinessException;
 
 	
 }
