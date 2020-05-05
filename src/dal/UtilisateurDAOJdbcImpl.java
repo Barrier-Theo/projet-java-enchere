@@ -191,7 +191,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			if(id == null)
 			{
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+				businessException.ajouterErreur(CodesResultatDAL.SELECT_OBJET);
 				throw businessException;
 			}
 			Utilisateur utilisateur = null;
@@ -226,7 +226,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			{
 				e.printStackTrace();
 				System.out.println("erreur");
-				cnx.rollback();
 				throw e;
 			}
 		}

@@ -3,15 +3,48 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bo.ArticlesVendus;
 import bo.Retraits;
+import bo.Utilisateur;
 import servlet.BusinessException;
 
 public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 
 	private static final String INSERT_ARTICLES_VENDUS="INSERT INTO ARTICLES_VENDUS VALUES(?,?,?,?,?,?,?,?)";
 	private static final String INSERT_RETRAIT="INSERT INTO RETRAITS VALUES(?,?,?,?)";
+	private static final String SELECT_ALL="SELECT * FROM ARTICLES_VENDUS";
+	private static final String SELECT_ARTICLE_BY_ID="SELECT * FROM ARTICLES_VENDUS where no_article = ?";
+
+	
+	
+	@Override
+	public List<ArticlesVendus> selectAll() throws BusinessException {
+		List<ArticlesVendus> listeArticles = new ArrayList<ArticlesVendus>();
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next())
+			{
+				listeArticles.add(new ArticlesVendus(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie")));
+			}
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_LISTE_ECHEC);
+			throw businessException;
+		}
+		
+		return listeArticles;
+	}
 
 	public void insert(ArticlesVendus unArticleVendu, Retraits unRetrait) throws BusinessException {
 		if(unArticleVendu==null)
@@ -91,5 +124,55 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 			throw businessException;
 		}
 
+	}
+
+	@Override
+	public ArticlesVendus selectArticleById(Integer id) throws BusinessException {
+			if(id == null)
+			{
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.SELECT_OBJET);
+				throw businessException;
+			}
+			ArticlesVendus article = null;
+			
+			try(Connection cnx = ConnectionProvider.getConnection())
+			{
+				try
+				{
+				PreparedStatement pstmt = cnx.prepareStatement(SELECT_ARTICLE_BY_ID);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+	
+				while (rs.next()){
+					article = new ArticlesVendus();
+					article.setNoArticle(rs.getInt("no_article"));
+					article.setNomArticle(rs.getString("nom_article"));
+					article.setDescription(rs.getString("description"));
+					article.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+					article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					article.setMiseAPrix(rs.getInt("prix_initial"));
+					article.setPrixVente(rs.getInt("prix_vente"));
+					article.setNoCategorie(rs.getInt("no_utilisateur"));
+					article.setNoCategorie(rs.getInt("no_categorie"));
+				}
+				rs.close();
+				pstmt.close();
+				return article;
+				
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("erreur SELECT ARTICLE BY ID");
+				throw e;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_OBJET);
+			throw businessException;
+		}
 	}
 }
