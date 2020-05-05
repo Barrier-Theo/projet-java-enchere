@@ -37,7 +37,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 				while(rs.next())
 				{
-					userListe.add(new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("nom")));
+					userListe.add(new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"), rs.getInt("credit")));
 				}
 				
 			}

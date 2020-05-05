@@ -74,8 +74,10 @@
 			<input type="text" class="form-control" id="nomArticle" placeholder="Le nom de l'article contient">
 			<br/>
 			<b>Catégorie :</b>
-			<select class="form-control">
-				<option>...</option>
+			<select class="form-control" name="idCategorie">
+				<c:forEach items="${listeCategories}" var="uneCategorie">
+					<option value="${uneCategorie.noCategorie}">${uneCategorie.libelle}</option>
+				</c:forEach>
 			</select>
 			<br/>
 			<div class="radio">
@@ -130,9 +132,29 @@
 				<br/>
 				<u><a href="${pageContext.request.contextPath}/article?id=${unArticle.noArticle}"><h5> ${unArticle.nomArticle}</h5></u></a>
 				<br/>
-				<p>Prix : ${unArticle.miseAPrix} </p>
+				<c:if test="${listeEnchere.size() < 1}">
+					<p>Prix : ${unArticle.miseAPrix} </p>
+				</c:if>
+				<c:if test="${listeEnchere != null}">
+					<c:forEach items="${listeEnchere}" var="uneEnchere"> 
+						<c:if test="${uneEnchere.noArticle == unArticle.noArticle}">
+							<c:if test="${uneEnchere.prixVente < unArticle.miseAPrix || uneEnchere.prixVente == 0}">
+								<p>Prix : ${unArticle.miseAPrix} </p>
+							</c:if>
+							<c:if test="${uneEnchere.prixVente > unArticle.miseAPrix}">
+								<p>Prix : ${uneEnchere.prixVente} </p>
+							</c:if>
+	                    </c:if>
+	                </c:forEach>
+				</c:if>
+				
 				<p> Fin de l'enchère : ${unArticle.dateFinEncheres} </p>
-				<p> Vendeur : ${unArticle.noUtilisateur} </p>
+				<c:forEach items="${listeUtilisateur}" var="unUtilisateur">
+					<c:if test="${unUtilisateur.id == unArticle.noUtilisateur}">
+						<p> Vendeur : ${unUtilisateur.nom} </p>
+                    </c:if>
+                </c:forEach>
+				
 			</div>
 		</c:forEach>
 		
