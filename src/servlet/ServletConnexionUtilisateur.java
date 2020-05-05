@@ -33,18 +33,15 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
-		UtilisateurManager listeManager = new UtilisateurManager();
-		
+
 		try {
-			List<Utilisateur> listes = listeManager.selectAll();
-			request.setAttribute("listes", listes);
 			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 			rd.forward(request, response);
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 		}
-		
+
 		
 	}
 

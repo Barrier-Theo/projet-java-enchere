@@ -123,7 +123,7 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 				PreparedStatement pstmt;
 				pstmt = cnx.prepareStatement(INSERT_ENCHERE);
 				pstmt.setInt(1, unArticleVendu.getNoUtilisateur());
-				pstmt.setInt(2, unArticleVendu.getNoArticle());
+				pstmt.setInt(2, unRetrait.getNoArticle());
 				pstmt.setString(3, unArticleVendu.getDateFinEncheres().toString());
 				pstmt.setInt(4, 0);
 
@@ -135,7 +135,7 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 			catch(Exception e)
 			{
 				e.printStackTrace();
-				System.out.println("erreur insert retrait");
+				System.out.println("erreur insert enchere");
 				cnx.rollback();
 				throw e;
 			}
@@ -178,7 +178,7 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 					article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					article.setMiseAPrix(rs.getInt("prix_initial"));
 					article.setPrixVente(rs.getInt("prix_vente"));
-					article.setNoCategorie(rs.getInt("no_utilisateur"));
+					article.setNoUtilisateur(rs.getInt("no_utilisateur"));
 					article.setNoCategorie(rs.getInt("no_categorie"));
 				}
 				rs.close();

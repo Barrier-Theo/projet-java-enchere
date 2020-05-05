@@ -46,27 +46,29 @@
                             </tr>
                             <tr>
                                 <td><b>Catégorie :</b></td>
-                                <td>${a.noCategorie}</td>
+                                <td>${nomCategorie}</td>
                             </tr>
                             <tr>
                                 <td><b>Meilleur offre :</b></td>
-                                <td>210 pts par Bob</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td><b>Mise a prix :</b></td>
-                                <td>185 points</td>
+                                <td>${a.miseAPrix}</td>
                             </tr>
                             <tr>
                                 <td><b>Fin de l'enchére :</b></td>
-                                <td>09/10/2018</td>
+                                <td>${a.dateFinEncheres}</td>
                             </tr>
-                            <tr>
-                                <td><b>Retrait :</b></td>
-                                <td>10 allée des Alouettes<br>44800 Saint Herblain</td>
-                            </tr>
+                            <c:forEach items="${listeRetrait}" var="r">
+	                            <tr>
+	                                <td><b>Retrait :</b></td>
+	                                <td>${r.rue}<br>${r.codePostal} ${r.ville}</td>
+	                            </tr>
+                            </c:forEach>
                             <tr>
                                 <td><b>Vendeur :</b></td>
-                                <td>jojo44</td>
+                                <td>${pseudoVendeur}</td>
                             </tr>
                             <tr>
                                 <form action="">
