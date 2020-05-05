@@ -72,5 +72,19 @@ body {
     width: 100%;
     max-width: 600px;
     padding: 15px;
+    margin-right: 50px;
+}
+
+.enchere {
+    width: 100%;
+    max-width: 700px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.image {
+    width: 70%;
+    max-width: 400px;
+    padding: 15px;
     margin: 0 auto;
 }
