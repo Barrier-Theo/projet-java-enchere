@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import bll.UtilisateurManager;
 import bo.Utilisateur;
@@ -57,6 +55,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		// TODO Auto-generated method stub
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
+		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
@@ -64,9 +63,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		try {
 			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
 			session.setAttribute("id", idUtilisateur);
-			request.setAttribute("pseudo", pseudo);
-			request.setAttribute("password", password);
-			rd = request.getRequestDispatcher("/accueil.jsp");
+			rd = request.getRequestDispatcher("/ServletAccueil");
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());

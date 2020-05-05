@@ -1,6 +1,7 @@
 package bll;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import bo.ArticlesVendus;
 import bo.Retraits;
@@ -35,5 +36,9 @@ public class ArticlesVendusManager {
 		}
 	}
 
+	public List<ArticlesVendus> selectAll() throws BusinessException{
+		return this.articlesVendusDAO.selectAll();
+	}
+	
 
 }
