@@ -74,8 +74,10 @@
 			<input type="text" class="form-control" id="nomArticle" placeholder="Le nom de l'article contient">
 			<br/>
 			<b>Catégorie :</b>
-			<select class="form-control">
-				<option>...</option>
+			<select class="form-control" name="idCategorie">
+				<c:forEach items="${listeCategories}" var="uneCategorie">
+					<option value="${uneCategorie.noCategorie}">${uneCategorie.libelle}</option>
+				</c:forEach>
 			</select>
 			<br/>
 			<div class="radio">
@@ -132,7 +134,12 @@
 				<br/>
 				<p>Prix : ${unArticle.miseAPrix} </p>
 				<p> Fin de l'enchère : ${unArticle.dateFinEncheres} </p>
-				<p> Vendeur : ${unArticle.noUtilisateur} </p>
+				<c:forEach items="${listeUtilisateur}" var="unUtilisateur">
+					<c:if test="${unUtilisateur.id == unArticle.noUtilisateur}">
+						<p> Vendeur : ${unUtilisateur.nom} </p>
+                    </c:if>
+                </c:forEach>
+				
 			</div>
 		</c:forEach>
 		

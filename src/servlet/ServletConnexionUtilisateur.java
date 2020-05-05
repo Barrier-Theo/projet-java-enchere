@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import bll.ArticlesVendusManager;
+import bll.CategoriesManager;
 import bll.UtilisateurManager;
 import bo.ArticlesVendus;
+import bo.Categories;
 import bo.Utilisateur;
 
 /**
@@ -60,17 +61,23 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		ArticlesVendusManager listeArticleManager = new ArticlesVendusManager();
-		
+		CategoriesManager categoriesManager = new CategoriesManager();
+		List<Categories> listeCategories = new ArrayList<>();
 		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Integer idUtilisateur = null;
+		List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
 		try {
+			listeUtilisateur = utilisateurManager.selectAll();
+			request.setAttribute("listeUtilisateur", listeUtilisateur);
 			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
 			List<ArticlesVendus> listeArticles = listeArticleManager.selectAll();
 			request.setAttribute("listeArticle", listeArticles);
 			session.setAttribute("id", idUtilisateur);
+			listeCategories = categoriesManager.selectAll();
+			request.setAttribute("listeCategories", listeCategories);
 			rd = request.getRequestDispatcher("/accueil.jsp");
 		}catch(BusinessException e) {
 			e.printStackTrace();
