@@ -53,7 +53,7 @@
 					<a class="nav-link" href="<%=request.getContextPath() %>/ServletNouvelArticleVendu">Vendre un article</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/ServletProfil?idUser=${id}">Mon profil</a>
+					<a class="nav-link" href="<%=request.getContextPath() %>/ServletProfil">Mon profil</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Déconnexion</a>

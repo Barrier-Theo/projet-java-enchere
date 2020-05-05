@@ -52,11 +52,6 @@ public class ServletModificationProfil extends HttpServlet {
 		String newpassword = request.getParameter("nouveaumdp");
 		String newpasswordCfm = request.getParameter("confirmation");
 		
-		
-		
-		
-		
-		
 		Utilisateur utilisateur = new Utilisateur(id, pseudo,nom,prenom,email,telephone,rue,codePostal,ville,password, 500, false);
 		UtilisateurManager utilisateurManager = new UtilisateurManager();	
 		try {
@@ -71,7 +66,7 @@ public class ServletModificationProfil extends HttpServlet {
 			
 			utilisateurManager.modifierUtilisateur(utilisateur);
 			//TODO definir sur page d'accueil.
-			rd = request.getRequestDispatcher("/liste.jsp");
+			rd = request.getRequestDispatcher("/ServletProfil");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			rd = request.getRequestDispatcher("/modifierProfil.jsp");
