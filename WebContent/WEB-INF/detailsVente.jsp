@@ -29,7 +29,7 @@
             </div>
 
             <div class="col-8">
-                <div class="profil">
+                <div class="enchere">
 
                     <h1 class="h3 mb-3 font-weight-normal marginbottom text-center">Detail vente</h1>
 

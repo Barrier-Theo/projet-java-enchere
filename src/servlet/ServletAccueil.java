@@ -63,7 +63,7 @@ public class ServletAccueil extends HttpServlet {
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
+			rd = request.getRequestDispatcher("/connexion.jsp");
 
 		}
 		rd.forward(request, response);

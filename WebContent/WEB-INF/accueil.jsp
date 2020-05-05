@@ -12,6 +12,8 @@
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="theme/css/accueil.css">
+    
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -128,7 +130,8 @@
 		</div>
 		<c:forEach items="${listeArticle}" var="unArticle">
 			
-			<div class="col-6">
+			<div class="col-6 card">
+			  <div class="card-body">
 				<br/>
 				<u><a href="${pageContext.request.contextPath}/enchere?id=${unArticle.noArticle}"><h5> ${unArticle.nomArticle}</h5></u></a>
 				<br/>
@@ -154,7 +157,7 @@
 						<p> Vendeur : ${unUtilisateur.nom} </p>
                     </c:if>
                 </c:forEach>
-				
+				</div>
 			</div>
 		</c:forEach>
 		
