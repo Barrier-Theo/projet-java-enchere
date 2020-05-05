@@ -39,6 +39,10 @@ public class ArticlesVendusManager {
 	public List<ArticlesVendus> selectAll() throws BusinessException{
 		return this.articlesVendusDAO.selectAll();
 	}
+
+	public ArticlesVendus selectArticleById(Integer id) throws BusinessException{
+		return this.articlesVendusDAO.selectArticleById(id);
+	}
 	
 
 }
