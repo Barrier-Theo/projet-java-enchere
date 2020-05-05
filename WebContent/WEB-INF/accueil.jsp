@@ -82,46 +82,47 @@
 				</c:forEach>
 			</select>
 			<br/>
-			<div class="radio">
-				<div class="row">
-					<div class="col">
-						<label><input type="radio" class="achat" name="optradio" checked>Achats</label>
-						<div class="checkedAchat">
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input group1" id="checkedEncheresOuvertes">
-								<label class="custom-control-label" for="checkedEncheresOuvertes">Enchères ouvertes</label>
-							</div>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input group1" id="checkedEncheresEnCours">
-								<label class="custom-control-label" for="checkedEncheresEnCours">Mes enchères en cours </label>
-							</div>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input group1" id="checkedEncheresRemportees">
-								<label class="custom-control-label" for="checkedEncheresRemportees">Mes enchères remportées</label>
+			<c:if test="${id != null}">
+				<div class="radio">
+					<div class="row">
+						<div class="col">
+							<label><input type="radio" class="achat" name="optradio" checked>Achats</label>
+							<div class="checkedAchat">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input group1" id="checkedEncheresOuvertes">
+									<label class="custom-control-label" for="checkedEncheresOuvertes">Enchères ouvertes</label>
+								</div>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input group1" id="checkedEncheresEnCours">
+									<label class="custom-control-label" for="checkedEncheresEnCours">Mes enchères en cours </label>
+								</div>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input group1" id="checkedEncheresRemportees">
+									<label class="custom-control-label" for="checkedEncheresRemportees">Mes enchères remportées</label>
+								</div>
 							</div>
 						</div>
-					</div>
-					
-					<div class="col">
-						<label><input type="radio" class="mesVentes" name="optradio">Mes Ventes</label>
-						<div class="checkedVentes">
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input group2" id="checkedVentesOuvertes">
-								<label class="custom-control-label" for="checkedVentesOuvertes">Mes Ventes en cours</label>
-							</div>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input group2" id="checkedVentesNondebutees">
-								<label class="custom-control-label" for="checkedVentesNondebutees">Ventes non débutées</label>
-							</div>
-							<div class="custom-control custom-checkbox">							
-								<input type="checkbox" class="custom-control-input group2" id="checkedVentesTerminees">
-								<label class="custom-control-label" for="checkedVentesTerminees">Ventes terminées</label>
+						
+						<div class="col">
+							<label><input type="radio" class="mesVentes" name="optradio">Mes Ventes</label>
+							<div class="checkedVentes">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input group2" id="checkedVentesOuvertes">
+									<label class="custom-control-label" for="checkedVentesOuvertes">Mes Ventes en cours</label>
+								</div>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input group2" id="checkedVentesNondebutees">
+									<label class="custom-control-label" for="checkedVentesNondebutees">Ventes non débutées</label>
+								</div>
+								<div class="custom-control custom-checkbox">							
+									<input type="checkbox" class="custom-control-input group2" id="checkedVentesTerminees">
+									<label class="custom-control-label" for="checkedVentesTerminees">Ventes terminées</label>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
+			</c:if>
 			<br/> 
 			<button type="button" class="btn btn-primary btn-lg">Rechercher</button>
 		</div>
