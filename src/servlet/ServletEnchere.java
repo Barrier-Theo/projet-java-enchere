@@ -43,6 +43,8 @@ public class ServletEnchere extends HttpServlet {
 			
 			listeArticle.add(articleVendu);
 			request.setAttribute("listeArticle", listeArticle);	
+			rd = request.getRequestDispatcher("/detailsVente.jsp");
+			rd.forward(request, response);
 			
 		}catch(BusinessException e) {
 			e.printStackTrace();

@@ -130,7 +130,7 @@
 			
 			<div class="col-6">
 				<br/>
-				<u><a href="${pageContext.request.contextPath}/article?id=${unArticle.noArticle}"><h5> ${unArticle.nomArticle}</h5></u></a>
+				<u><a href="${pageContext.request.contextPath}/detailsVente?id=${unArticle.noArticle}"><h5> ${unArticle.nomArticle}</h5></u></a>
 				<br/>
 				<c:if test="${listeEnchere.size() < 1}">
 					<p>Prix : ${unArticle.miseAPrix} </p>

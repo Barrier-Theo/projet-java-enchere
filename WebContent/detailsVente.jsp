@@ -50,15 +50,15 @@
                             </tr>
                             <tr>
                                 <td><b>Meilleur offre :</b></td>
-                                <td>210 pts par Bob</td>
+                                <td>${a.description}</td>
                             </tr>
                             <tr>
                                 <td><b>Mise a prix :</b></td>
-                                <td>185 points</td>
+                                <td>${a.description}</td>
                             </tr>
                             <tr>
                                 <td><b>Fin de l'enchére :</b></td>
-                                <td>09/10/2018</td>
+                                <td>${a.description}</td>
                             </tr>
                             <tr>
                                 <td><b>Retrait :</b></td>
