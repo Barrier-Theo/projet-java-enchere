@@ -23,7 +23,7 @@ public class ServletDeconnexion extends HttpServlet {
 		
 		if(session != null) {
 			session.invalidate();
-			response.sendRedirect("connexion.jsp");
+			response.sendRedirect("/WEB-INF/connexion.jsp");
 		}
 	}
 

@@ -33,16 +33,8 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
-
-		try {
-			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
-			rd.forward(request, response);
-		}catch(BusinessException e) {
-			e.printStackTrace();
-			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-		}
-
-		
+		rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

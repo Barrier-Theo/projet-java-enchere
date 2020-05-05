@@ -65,7 +65,7 @@ public class ServletEnchere extends HttpServlet {
 			request.setAttribute("pseudoVendeur", utilisateur.getPseudo());	
 
 
-			rd = request.getRequestDispatcher("/detailsVente.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/detailsVente.jsp");
 			rd.forward(request, response);
 			
 		}catch(BusinessException e) {
