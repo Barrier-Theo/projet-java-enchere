@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import bll.ArticlesVendusManager;
 import bll.CategoriesManager;
+import bll.EncheresManager;
 import bll.UtilisateurManager;
 import bo.ArticlesVendus;
 import bo.Categories;
+import bo.Encheres;
 import bo.Utilisateur;
 
 /**
@@ -40,12 +43,16 @@ public class ServletAccueil extends HttpServlet {
 		RequestDispatcher rd = null;
 		ArticlesVendusManager listeArticleManager = new ArticlesVendusManager();
 		CategoriesManager categoriesManager = new CategoriesManager();
+		EncheresManager enchereManager = new EncheresManager();
+		List<Encheres> listeEnchere = new ArrayList<>();
 		List<Categories> listeCategories = new ArrayList<>();
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
 		
 		try {
+			listeEnchere = enchereManager.selectAll();
+			request.setAttribute("listeEnchere", listeEnchere);
 			listeUtilisateur = utilisateurManager.selectAll();
 			request.setAttribute("listeUtilisateur", listeUtilisateur);
 			List<ArticlesVendus> listeArticles = listeArticleManager.selectAll();

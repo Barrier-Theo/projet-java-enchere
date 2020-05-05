@@ -132,7 +132,22 @@
 				<br/>
 				<u><h5>${unArticle.nomArticle}</h5></u>
 				<br/>
-				<p>Prix : ${unArticle.miseAPrix} </p>
+				<c:if test="${listeEnchere.size() < 1}">
+					<p>Prix : ${unArticle.miseAPrix} </p>
+				</c:if>
+				<c:if test="${listeEnchere != null}">
+					<c:forEach items="${listeEnchere}" var="uneEnchere"> 
+						<c:if test="${uneEnchere.noArticle == unArticle.noArticle}">
+							<c:if test="${uneEnchere.prixVente < unArticle.miseAPrix || uneEnchere.prixVente == 0}">
+								<p>Prix : ${unArticle.miseAPrix} </p>
+							</c:if>
+							<c:if test="${uneEnchere.prixVente > unArticle.miseAPrix}">
+								<p>Prix : ${uneEnchere.prixVente} </p>
+							</c:if>
+	                    </c:if>
+	                </c:forEach>
+				</c:if>
+				
 				<p> Fin de l'enchère : ${unArticle.dateFinEncheres} </p>
 				<c:forEach items="${listeUtilisateur}" var="unUtilisateur">
 					<c:if test="${unUtilisateur.id == unArticle.noUtilisateur}">
