@@ -31,7 +31,14 @@ public class EncheresManager {
 	}
 
 	public void updateEnchere(Encheres enchere)  throws BusinessException{
-		this.encheresDAO.updateEnchere(enchere);
+		//Meilleure Offre donc l'ancienne
+		Encheres encheMeilleureOffre= this.encheresDAO.selectMeilleureOffreById(enchere.getNoArticle());
+		//SI prix vente = 0, echere initialisé donc pas de meilleure offr.
+		if(encheMeilleureOffre.getPrixVente() != 0) {
+			this.encheresDAO.updateCreditAncienUtilisateur(encheMeilleureOffre);
+		}
+		
+		this.encheresDAO.updateEnchereEtCreditUtilisateur(enchere);
 	}
 	
 }

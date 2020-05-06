@@ -3,11 +3,15 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import bo.ArticlesVendus;
 import bo.Retraits;
+import bo.Utilisateur;
 import servlet.BusinessException;
 
 public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
@@ -199,8 +203,8 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 			throw businessException;
 		}
 	}
-	
-	
+
+
 	@Override
 public List<ArticlesVendus> selectByFiltre(Integer unIdDeCategorie, String contient) throws BusinessException {
 	if(unIdDeCategorie == null)
@@ -210,7 +214,7 @@ public List<ArticlesVendus> selectByFiltre(Integer unIdDeCategorie, String conti
 		throw businessException;
 	}
 	List<ArticlesVendus> listeArticlesVendus = new ArrayList<>();
-	
+
 	try(Connection cnx = ConnectionProvider.getConnection())
 	{
 		try
@@ -246,14 +250,14 @@ public List<ArticlesVendus> selectByFiltre(Integer unIdDeCategorie, String conti
 			}
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
-			{	
+			{
 				ArticlesVendus unArticleVendu = new ArticlesVendus(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
 				listeArticlesVendus.add(unArticleVendu);
 			}
 			rs.close();
 			pstmt.close();
 			return listeArticlesVendus;
-			
+
 		}
 		catch(Exception e)
 		{

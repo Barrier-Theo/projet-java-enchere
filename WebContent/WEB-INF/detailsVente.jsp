@@ -51,7 +51,7 @@
                             </td>
                             <c:choose>
 	                            <c:when test="${meilleureOffre != 0}">
-	                              	<td>${meilleureOffre} par ${speudoMeilleureOffre}</td>
+	                              	<td>${meilleureOffre} par <strong>${speudoMeilleureOffre}</strong></td>
 							    </c:when>
 					        	<c:otherwise>
 					        		<td>Aucune offre n'a été effectué</td>
@@ -76,14 +76,27 @@
                                 <td>${pseudoVendeur}</td>
                             </tr>
                             <tr>
-                            <c:if test="${idSession != no_utilisateur}">
-                                <form method="POST" action="${pageContext.request.contextPath}/enchere">
-                                    <td><b>Ma proposition :</b></td>
-                                    <td><input id="id" name="id" type="hidden" value="${a.noArticle}">
-                                        <input type="number" min="${minProposition}" value="${minProposition}" id="montant" name="montant">
-                                        <button style="margin-left: 10px;" class="btn btn-info" type="submit">Enchérir</button></td>
-                                </form>
-                            </c:if>
+                       
+                			<c:choose>
+	                			<c:when test="${a.dateFinEncheres >= todayDate}">
+		                        	<c:if test="${idSession != no_utilisateur}">
+			                        	<form method="POST" action="${pageContext.request.contextPath}/enchere">
+			                            	<td><b>Ma proposition :</b></td>
+			                                <td><input id="id" name="id" type="hidden" value="${a.noArticle}">
+			                                <input type="number" min="${minProposition}" value="${minProposition}" id="montant" name="montant">
+			                                <button style="margin-left: 10px;" class="btn btn-info" type="submit">Enchérir</button></td>
+			                            </form>
+	                           		</c:if>
+								</c:when>
+						        <c:when test="${meilleureOffre != 0}">
+							       <td><b>Etat de l'enchère</b></td>
+							       <td><strong>${speudoMeilleureOffre} </strong>a gagné l'enchère avec un prix de ${meilleureOffre}</td>
+							    </c:when>
+						        <c:otherwise>
+							    	<td><b>Etat de l'enchère</b></td>
+							        <td>L'enchère est terminé, Il n'y a jamais eu d'offre d'enchères.</td>
+						        </c:otherwise>
+					        </c:choose>
                             </tr>
                         </tbody>
                     </table>
