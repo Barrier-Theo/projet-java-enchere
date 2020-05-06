@@ -18,6 +18,11 @@ public class Encheres {
 		this.dateEnchere = dateEnchere;
 		this.prixVente = prixVente;
 	}
+	public Encheres(Integer noUtilisateur, Integer noArticle,Integer prixVente) {
+		this.noUtilisateur = noUtilisateur;
+		this.noArticle = noArticle;
+		this.prixVente = prixVente;
+	}
 	
 	public Encheres() {
 		

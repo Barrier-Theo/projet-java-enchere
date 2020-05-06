@@ -155,7 +155,7 @@
 				<p> Fin de l'enchère : ${unArticle.dateFinEncheres} </p>
 				<c:forEach items="${listeUtilisateur}" var="unUtilisateur">
 					<c:if test="${unUtilisateur.id == unArticle.noUtilisateur}">
-						<p> Vendeur : ${unUtilisateur.nom} </p>
+						<p> Vendeur : ${unUtilisateur.pseudo} </p>
                     </c:if>
                 </c:forEach>
 				</div>

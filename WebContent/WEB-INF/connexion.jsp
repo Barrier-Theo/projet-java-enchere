@@ -55,7 +55,7 @@
 
         <a href="#" class="">mot de passe oublié</a>
 
-        <a href="${pageContext.request.contextPath}/inscription.jsp" style="color:white;" class="btn btn-lg btn-primary btn-block margintop marginbottom">Créer un compte</a>
+        <a href="${pageContext.request.contextPath}/WEB-INF/inscription.jsp" style="color:white;" class="btn btn-lg btn-primary btn-block margintop marginbottom">Créer un compte</a>
 
     </form>
 </body>

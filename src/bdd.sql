@@ -113,4 +113,10 @@ SELECT * FROM CATEGORIES;
 SELECT * FROM ARTICLES_VENDUS;
 SELECT * FROM RETRAITS;
 SELECT * FROM ENCHERES;
+SELECT * FROM UTILISATEURS;
 
+SELECT TOP 1 MAX(montant_enchere) AS montant, no_article, no_utilisateur, date_enchere FROM ENCHERES  where no_article = 12
+GROUP BY no_article, no_utilisateur,date_enchere;
+
+
+UPDATE ENCHERES SET no_utilisateur = 10, montant_enchere = 231  WHERE no_article = 16 ;

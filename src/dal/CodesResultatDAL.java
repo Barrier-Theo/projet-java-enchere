@@ -20,6 +20,9 @@ public abstract class CodesResultatDAL {
 	
 	public static final int DESACTIVATION_UTILISATEUR=10005;
 	
+	public static final int UPDATE_OBJET_NULL=10006;
+	
+	
 	
 	
 }
