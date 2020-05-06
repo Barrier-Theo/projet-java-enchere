@@ -14,59 +14,61 @@
 	  </div>
 	  <div class="row">
 		<div class="col">
-			<b>Filtres :</b>
-			<input type="text" class="form-control" id="nomArticle" placeholder="Le nom de l'article contient">
-			<br/>
-			<b>Catégorie :</b>
-			<select class="form-control" name="idCategorie">
-				<c:forEach items="${listeCategories}" var="uneCategorie">
-					<option value="${uneCategorie.noCategorie}">${uneCategorie.libelle}</option>
-				</c:forEach>
-			</select>
-			<br/>
-			<c:if test="${id != null}">
-				<div class="radio">
-					<div class="row">
-						<div class="col">
-							<label><input type="radio" class="achat" name="optradio" checked>Achats</label>
-							<div class="checkedAchat">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input group1" id="checkedEncheresOuvertes">
-									<label class="custom-control-label" for="checkedEncheresOuvertes">Enchères ouvertes</label>
-								</div>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input group1" id="checkedEncheresEnCours">
-									<label class="custom-control-label" for="checkedEncheresEnCours">Mes enchères en cours </label>
-								</div>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input group1" id="checkedEncheresRemportees">
-									<label class="custom-control-label" for="checkedEncheresRemportees">Mes enchères remportées</label>
+	  		<form class="form-filtre" action="${pageContext.request.contextPath}/ServletFiltre" method="GET">
+				<b>Filtres :</b>
+				<input type="text" class="form-control" id="nomArticle" placeholder="Le nom de l'article contient">
+				<br/>
+				<b>Catégorie :</b>
+				<select class="form-control" name="idCategorie">
+					<c:forEach items="${listeCategories}" var="uneCategorie">
+						<option value="${uneCategorie.noCategorie}">${uneCategorie.libelle}</option>
+					</c:forEach>
+				</select>
+				<br/>
+				<c:if test="${id != null}">
+					<div class="radio">
+						<div class="row">
+							<div class="col">
+								<label><input type="radio" class="achat" name="optradio" checked>Achats</label>
+								<div class="checkedAchat">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input group1" id="checkedEncheresOuvertes">
+										<label class="custom-control-label" for="checkedEncheresOuvertes">Enchères ouvertes</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input group1" id="checkedEncheresEnCours">
+										<label class="custom-control-label" for="checkedEncheresEnCours">Mes enchères en cours </label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input group1" id="checkedEncheresRemportees">
+										<label class="custom-control-label" for="checkedEncheresRemportees">Mes enchères remportées</label>
+									</div>
 								</div>
 							</div>
-						</div>
-						
-						<div class="col">
-							<label><input type="radio" class="mesVentes" name="optradio">Mes Ventes</label>
-							<div class="checkedVentes">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input group2" id="checkedVentesOuvertes">
-									<label class="custom-control-label" for="checkedVentesOuvertes">Mes Ventes en cours</label>
-								</div>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input group2" id="checkedVentesNondebutees">
-									<label class="custom-control-label" for="checkedVentesNondebutees">Ventes non débutées</label>
-								</div>
-								<div class="custom-control custom-checkbox">							
-									<input type="checkbox" class="custom-control-input group2" id="checkedVentesTerminees">
-									<label class="custom-control-label" for="checkedVentesTerminees">Ventes terminées</label>
+							
+							<div class="col">
+								<label><input type="radio" class="mesVentes" name="optradio">Mes Ventes</label>
+								<div class="checkedVentes">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input group2" id="checkedVentesOuvertes">
+										<label class="custom-control-label" for="checkedVentesOuvertes">Mes Ventes en cours</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input group2" id="checkedVentesNondebutees">
+										<label class="custom-control-label" for="checkedVentesNondebutees">Ventes non débutées</label>
+									</div>
+									<div class="custom-control custom-checkbox">							
+										<input type="checkbox" class="custom-control-input group2" id="checkedVentesTerminees">
+										<label class="custom-control-label" for="checkedVentesTerminees">Ventes terminées</label>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</c:if>
-			<br/> 
-			<button type="button" class="btn btn-primary btn-lg">Rechercher</button>
+				</c:if>
+				<br/> 
+				<button type="button" class="btn btn-primary btn-lg">Rechercher</button>
+			</form>
 		</div>
 		<div class="col-6">
 	
