@@ -2,68 +2,10 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="messages.LecteurMessage" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="fr">
 
-<head>
-  <meta charset="UTF-8">
-
-    <title>Accueil</title>
-
-    <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="theme/css/accueil.css">
-    
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-		var bool = 0;
-		$("input.group2").attr("disabled", true);
-		$("input.group1").removeAttr("disabled");
-		
-        $('input[type="radio"]').click(function(){
-          if(bool == 0){
-			$("input.group1").attr("disabled", true);
-			$("input.group2").removeAttr("disabled");
-			$("input.group1").removeAttr("checked");
-			bool = 1;
-		  }
-		  else{
-			$("input.group2").attr("disabled", true);
-			$("input.group1").removeAttr("disabled");
-			$("input.group2").removeAttr("checked");
-			bool = 0;
-		  }
-        });
-      });
-    </script>
-</head>
-
-
-<body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">ENI-Enchères</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarText">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Enchères <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/ServletNouvelArticleVendu">Vendre un article</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/ServletProfil">Mon profil</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<%=request.getContextPath() %>/deconnexion">Déconnexion</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
-
+<%@include file="fragments/Head.jsp"%>
+<%@include file="fragments/Menu.jsp"%>
+	
 	<div class="container">
 	  <div class="row">
 		<div class="col" style="text-align:center">
@@ -130,7 +72,8 @@
 		</div>
 		<c:forEach items="${listeArticle}" var="unArticle">
 			
-			<div class="col-6 card">
+			<div class="col-6">
+			<div class="card border-primary">
 			  <div class="card-body">
 				<br/>
 				<u><a href="${pageContext.request.contextPath}/enchere?id=${unArticle.noArticle}"><h5> ${unArticle.nomArticle}</h5></u></a>
@@ -154,18 +97,17 @@
 				<p> Fin de l'enchère : ${unArticle.dateFinEncheres} </p>
 				<c:forEach items="${listeUtilisateur}" var="unUtilisateur">
 					<c:if test="${unUtilisateur.id == unArticle.noUtilisateur}">
-						<p> Vendeur : ${unUtilisateur.nom} </p>
+						<div class="card-footer bg-transparent border-primary">Vendeur : ${unUtilisateur.pseudo}</div>
                     </c:if>
                 </c:forEach>
 				</div>
+			</div>
 			</div>
 		</c:forEach>
 		
 	  </div>
 	  
 	</div>
-</body>
 
-</html>
-
+<%@include file="fragments/Bottom.jsp"%>
 

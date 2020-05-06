@@ -2,24 +2,12 @@
 <%@ page import="messages.LecteurMessage" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!doctype html>
-<html lang="fr">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%@include file="fragments/Head.jsp"%>
+<%@include file="fragments/Menu.jsp"%>
 
-    <title>eni-encheres</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-
-</head>
-
-<body class="text-center">
-
-    <form class="form-modif" action="${pageContext.request.contextPath}/ServletModificationProfil" method="POST">
+    <form class="form-modif text-center" action="${pageContext.request.contextPath}/ServletModificationProfil" method="POST">
 
         <h1 class="h3 mb-3 font-weight-normal marginbottom">Mon Profil</h1>
 
@@ -150,6 +138,5 @@
 
 
     </form>
-</body>
 
-</html>
+<%@include file="fragments/Bottom.jsp"%>

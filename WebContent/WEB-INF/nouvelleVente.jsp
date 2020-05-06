@@ -2,28 +2,15 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page import="messages.LecteurMessage" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="fr">
 
-<head>
-  <meta charset="UTF-8">
+<%@include file="fragments/Head.jsp"%>
+<%@include file="fragments/Menu.jsp"%>
 
-    <title>Nouvelle Vente</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    
-
-</head>
-
-
-<body>
 	<div class="container">
 	  <div class="row">
 		<div class="col-sm">
 			<div class="col-xs-8 col-sm-10">
-				<img src="background.jpg" alt="..." class="img-thumbnail">
+				<img src="WEB-INF/background.jpg" alt="..." class="img-thumbnail">
 			</div>
 		</div>
 		
@@ -122,6 +109,5 @@
 		</div>
 	  </div>
 	</div>
-</body>
 
-</html>
+<%@include file="fragments/Bottom.jsp"%>

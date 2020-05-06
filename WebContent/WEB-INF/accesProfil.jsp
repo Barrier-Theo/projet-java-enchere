@@ -1,23 +1,12 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!doctype html>
-<html lang="fr">
+<%@ page import="messages.LecteurMessage" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%@include file="fragments/Head.jsp"%>
+<%@include file="fragments/Menu.jsp"%>
 
-    <title>eni-encheres</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-
-</head>
-
-<body class="text-center">
-
+<div class="contenu-page text-center">
 <div class="profil">
 
         <h1 class="h3 mb-3 font-weight-normal marginbottom">Votre Profil</h1>
@@ -93,7 +82,6 @@
         
 
     </div>
+</div>
 
-</body>
-
-</html>
+<%@include file="fragments/Bottom.jsp"%>

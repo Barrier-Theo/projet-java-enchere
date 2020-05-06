@@ -1,26 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="messages.LecteurMessage" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="fr">
+<%@ page import="messages.LecteurMessage" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>eni-encheres</title>
-
-    <!-- TODO BOOSTRAP DANS LE PROJET, JSP DANS WEB-INF,  Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="theme/css/style.css">
-    
-
-</head>
-
-<body class="text-center">
+<%@include file="fragments/Head.jsp"%>
 	
-    <form class="form-signin" action="${pageContext.request.contextPath}/ServletConnexionUtilisateur" method="POST">
+    <form class="form-signin contenu-page" action="${pageContext.request.contextPath}/ServletConnexionUtilisateur" method="POST">
 
         <h1 class="h3 mb-3 font-weight-normal marginbottom">Connexion</h1>
 		<c:if test="${!empty listeCodesErreur}">
@@ -58,6 +43,5 @@
         <a href="${pageContext.request.contextPath}/inscription.jsp" style="color:white;" class="btn btn-lg btn-primary btn-block margintop marginbottom">Créer un compte</a>
 
     </form>
-</body>
 
-</html>
+<%@include file="fragments/Bottom.jsp"%>
