@@ -216,6 +216,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 					utilisateur.setCodePostal(rs.getString("code_postal"));
 					utilisateur.setVille(rs.getString("ville"));
 					utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+					utilisateur.setCredit(rs.getInt("credit"));
 				}
 				rs.close();
 				pstmt.close();

@@ -1,14 +1,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+
 <%@include file="fragments/Head.jsp"%>
 <%@include file="fragments/Menu.jsp"%>
 
+<body class="">
     <div class="container-fluid">
         <div class="row">
+            <c:if test="${!empty listeCodesErreur}">
+                <div class="alert alert-danger text-left" role="alert">
+                    <ul>
+                        <c:forEach var="code" items="${listeCodesErreur}">
+                            <li>${LecteurMessage.getMessageErreur(code)}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </c:if>
 		<c:forEach items="${listeArticle}" var="a">
-			
             <div class="col-4">
                 <div class="">
                     <img src="https://via.placeholder.com/350" align="right" class="img-fluid" alt="Responsive image">
@@ -19,7 +28,7 @@
                 <div class="enchere">
 
                     <h1 class="h3 mb-3 font-weight-normal marginbottom text-center">Detail vente</h1>
-
+					<p>Mes crédits : ${credit}</p>
                     <table class="table table-borderless text-left">
                         <tbody>
                             <tr>
@@ -36,9 +45,17 @@
                                 <td>${nomCategorie}</td>
                             </tr>
                             <tr>
-                                <td><b>Meilleur offre :</b></td>
-                                <td></td>
-                            </tr>
+                            <td>
+                            	<b>Meilleur offre :</b></td>
+                            </td>
+                            <c:choose>
+	                            <c:when test="${meilleureOffre != 0}">
+	                              	<td>${meilleureOffre} par ${speudoMeilleureOffre}</td>
+							    </c:when>
+					        	<c:otherwise>
+					        		<td>Aucune offre n'a été effectué</td>
+					        	</c:otherwise>
+				        	</c:choose>
                             <tr>
                                 <td><b>Mise a prix :</b></td>
                                 <td>${a.miseAPrix}</td>
@@ -58,13 +75,14 @@
                                 <td>${pseudoVendeur}</td>
                             </tr>
                             <tr>
-                                <form action="">
+                            <c:if test="${idSession != no_utilisateur}">
+                                <form method="POST" action="${pageContext.request.contextPath}/enchere">
                                     <td><b>Ma proposition :</b></td>
-                                    <td><input id="idEnchere" name="idEnchere" type="hidden" value="">
-                                        <input id="idVendeur" name="idVendeur" type="hidden" value="">
-                                        <input type="number" value="210" name="proposition">
+                                    <td><input id="id" name="id" type="hidden" value="${a.noArticle}">
+                                        <input type="number" min="${minProposition}" value="${minProposition}" id="montant" name="montant">
                                         <button style="margin-left: 10px;" class="btn btn-info" type="submit">Enchérir</button></td>
                                 </form>
+                            </c:if>
                             </tr>
                         </tbody>
                     </table>

@@ -1,8 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="messages.LecteurMessage" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@include file="fragments/Head.jsp"%>
 <%@include file="fragments/Menu.jsp"%>
 

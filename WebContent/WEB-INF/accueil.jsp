@@ -5,7 +5,7 @@
 
 <%@include file="fragments/Head.jsp"%>
 <%@include file="fragments/Menu.jsp"%>
-	
+
 	<div class="container">
 	  <div class="row">
 		<div class="col" style="text-align:center">
