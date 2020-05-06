@@ -68,7 +68,6 @@ public class ServletEnchere extends HttpServlet {
 			
 			if(utilisateurMeilleurOffre != null) {
 				pseudoMeilleureOffre = utilisateurMeilleurOffre.getPseudo();
-
 			}
 			
 
@@ -109,6 +108,10 @@ public class ServletEnchere extends HttpServlet {
 		
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		
+		ArticlesVendusManager articleVenduManager = new ArticlesVendusManager();
+		
+				
+		
 		Utilisateur utilisateur = utilisateurManager.selectUser(idUtilisateur);
 		BusinessException businessException = 	new BusinessException();
 
@@ -119,7 +122,10 @@ public class ServletEnchere extends HttpServlet {
 				throw businessException;
 			}
 			
-			articleManager.updateEnchere(enchere);
+			ArticlesVendus a =  articleVenduManager.selectArticleById(idArticle);
+			
+			
+			articleManager.updateEnchere(enchere, a.getNoUtilisateur());
 			rd = request.getRequestDispatcher("/ServletRedirectForm");
 			rd.forward(request, response);
 		}catch(BusinessException e) {

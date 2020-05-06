@@ -201,4 +201,41 @@ private static final String UPDATE_CREDIT_UTILISATEUR_PLUS="UPDATE UTILISATEURS 
 
 	}
 
+	@Override
+	public void updateCreditAuVendeur(Integer idUtilisateurVendeur, Integer prixVente) throws BusinessException {
+
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			try
+			{
+				cnx.setAutoCommit(false);
+				PreparedStatement pstmt;
+				ResultSet rs;
+					pstmt = cnx.prepareStatement(UPDATE_CREDIT_UTILISATEUR_PLUS);
+					pstmt.setInt(1, prixVente);
+					pstmt.setInt(2, idUtilisateurVendeur);
+					pstmt.executeUpdate();
+					pstmt.close();
+
+				cnx.commit();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("erreur update credit utilisateur");
+				cnx.rollback();
+				throw e;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_NULL);
+			throw businessException;
+		}
+
+		
+	}
+
 }

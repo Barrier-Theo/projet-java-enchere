@@ -14,6 +14,8 @@ public interface EncheresDAO {
 	public void updateEnchereEtCreditUtilisateur(Encheres enchere) throws BusinessException;
 
 	public void updateCreditAncienUtilisateur(Encheres enchere)  throws BusinessException;
+
+	public void updateCreditAuVendeur(Integer idUtilisateurVendeur, Integer prixVente) throws BusinessException;
 	
 	
 }
