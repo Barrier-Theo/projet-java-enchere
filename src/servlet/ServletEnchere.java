@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.nio.channels.SelectableChannel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,8 @@ public class ServletEnchere extends HttpServlet {
 		Integer idSession = (Integer) session.getAttribute("id");
 		Integer meilleureOffre = 0;
 		String pseudoMeilleureOffre = "";
+		LocalDate todayDate = LocalDate.now();
+
 		try {
 			
 			ArticlesVendus articleVendu = articleManager.selectArticleById(id);
@@ -58,8 +61,8 @@ public class ServletEnchere extends HttpServlet {
 			Utilisateur utilisateur = utilisateurManager.selectUser(articleVendu.getNoUtilisateur());
 			Categories  categorie = categorieManager.selectCategorieById(articleVendu.getNoCategorie());
 			Encheres meilleureEnchere = enchereManager.selectMeilleureOffreById(articleVendu.getNoArticle());
-			//TODO faire recuperer enchere meilleure offre
 			meilleureOffre =  meilleureEnchere.getPrixVente();
+			Utilisateur utilisateurConnecte = utilisateurManager.selectUser(idSession);
 			
 			Utilisateur utilisateurMeilleurOffre = utilisateurManager.selectUser(meilleureEnchere.getNoUtilisateur());
 			
@@ -67,6 +70,7 @@ public class ServletEnchere extends HttpServlet {
 				pseudoMeilleureOffre = utilisateurMeilleurOffre.getPseudo();
 
 			}
+			
 
 			listeArticle.add(articleVendu);
 			listeRetrait.add(retrait);
@@ -79,16 +83,15 @@ public class ServletEnchere extends HttpServlet {
 			request.setAttribute("idSession", idSession);	
 			request.setAttribute("no_utilisateur", articleVendu.getNoUtilisateur());
 			request.setAttribute("minProposition", this.minProposition(meilleureOffre, articleVendu.getMiseAPrix()));
-			request.setAttribute("credit", utilisateur.getCredit());
+			request.setAttribute("credit", utilisateurConnecte.getCredit());
+			request.setAttribute("todayDate", todayDate);
 			rd = request.getRequestDispatcher("WEB-INF/detailsVente.jsp");
 			rd.forward(request, response);
 			
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-		}
-		
-		
+		}	
 	}
 
 	/**
