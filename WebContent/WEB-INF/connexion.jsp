@@ -5,7 +5,7 @@
 
 <%@include file="fragments/Head.jsp"%>
 	
-    <form class="form-signin contenu-page" action="${pageContext.request.contextPath}/ServletConnexionUtilisateur" method="POST">
+    <form class="form-signin connexion text-center" action="${pageContext.request.contextPath}/ServletConnexionUtilisateur" method="POST">
 
         <h1 class="h3 mb-3 font-weight-normal marginbottom">Connexion</h1>
 		<c:if test="${!empty listeCodesErreur}">
