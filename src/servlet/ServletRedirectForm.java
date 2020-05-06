@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ServletRedirectForm")
 public class ServletRedirectForm extends HttpServlet {
 
-
+	public ServletRedirectForm() {
+		super();
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
