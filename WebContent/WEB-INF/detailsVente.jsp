@@ -6,10 +6,8 @@
 <%@include file="fragments/Menu.jsp"%>
 
 <body class="">
-    <div class="container-fluid">
-        <div class="row">
-            <c:if test="${!empty listeCodesErreur}">
-                <div class="alert alert-danger text-left" role="alert">
+			<c:if test="${!empty listeCodesErreur}">
+                <div class="alert alert-danger text-center" role="alert">
                     <ul>
                         <c:forEach var="code" items="${listeCodesErreur}">
                             <li>${LecteurMessage.getMessageErreur(code)}</li>
@@ -17,6 +15,9 @@
                     </ul>
                 </div>
             </c:if>
+    <div class="container-fluid">
+        <div class="row">
+            
 		<c:forEach items="${listeArticle}" var="a">
             <div class="col-4">
                 <div class="">

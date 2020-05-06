@@ -77,7 +77,7 @@
 			<div class="card border-primary">
 			  <div class="card-body">
 				<br/>
-				<u><a href="${pageContext.request.contextPath}/enchere?id=${unArticle.noArticle}"><h5> ${unArticle.nomArticle}</h5></u></a>
+				<u><a href="${pageContext.request.contextPath}/enchere?id=${unArticle.noArticle}"><h5>${unArticle.nomArticle}</h5></u></a>
 				<br/>
 				<c:if test="${listeEnchere.size() < 1}">
 					<p>Prix : ${unArticle.miseAPrix} </p>
