@@ -34,7 +34,7 @@
                         <tbody>
                             <tr>
                                 <td colspan="2">
-                                    <h3 class="h4 mb-3 font-weight-normal ">PC Gamer pour travailler</h3>
+                                    <h3 class="h4 mb-3 font-weight-normal ">${a.nomArticle} </h3>
                                 </td>
                             </tr>
                             <tr>

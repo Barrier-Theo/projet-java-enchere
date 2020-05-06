@@ -80,7 +80,6 @@ public class ServletEnchere extends HttpServlet {
 			request.setAttribute("no_utilisateur", articleVendu.getNoUtilisateur());
 			request.setAttribute("minProposition", this.minProposition(meilleureOffre, articleVendu.getMiseAPrix()));
 			request.setAttribute("credit", utilisateur.getCredit());
-			System.out.println(utilisateur.getCredit());
 			rd = request.getRequestDispatcher("WEB-INF/detailsVente.jsp");
 			rd.forward(request, response);
 			
