@@ -15,89 +15,71 @@
                     </ul>
                 </div>
             </c:if>
-    <div class="container-fluid">
-        <div class="row">
-            
-		<c:forEach items="${listeArticle}" var="a">
-            <div class="col-4">
-                <div class="">
-                    <img src="https://via.placeholder.com/350" align="right" class="img-fluid" alt="Responsive image">
-                </div>
-            </div>
-
-            <div class="col-8">
-                <div class="enchere">
-
-                    <h1 class="h3 mb-3 font-weight-normal marginbottom text-center">Detail vente</h1>
-					<p>Mes crédits : ${credit}</p>
-                    <table class="table table-borderless text-left">
-                        <tbody>
-                            <tr>
-                                <td colspan="2">
-                                    <h3 class="h4 mb-3 font-weight-normal ">${a.nomArticle} </h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><b>Description :</b></td>
-                                <td>${a.description}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Catégorie :</b></td>
-                                <td>${nomCategorie}</td>
-                            </tr>
-                            <tr>
-                            <td>
-                            	<b>Meilleur offre :</b></td>
-                            </td>
-                            <c:choose>
-	                            <c:when test="${meilleureOffre != 0}">
-	                              	<td>${meilleureOffre} par ${speudoMeilleureOffre}</td>
-							    </c:when>
-					        	<c:otherwise>
-					        		<td>Aucune offre n'a été effectué</td>
-					        	</c:otherwise>
-				        	</c:choose>
-                            <tr>
-                                <td><b>Mise a prix :</b></td>
-                                <td>${a.miseAPrix}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Fin de l'enchére :</b></td>
-                                <td>${a.dateFinEncheres}</td>
-                            </tr>
-                            <c:forEach items="${listeRetrait}" var="r">
-	                            <tr>
-	                                <td><b>Retrait :</b></td>
-	                                <td>${r.rue}<br>${r.codePostal} ${r.ville}</td>
-	                            </tr>
-                            </c:forEach>
-                            <tr>
-                                <td><b>Vendeur :</b></td>
-                                <td>${pseudoVendeur}</td>
-                            </tr>
-                            <tr>
-                            <c:if test="${idSession != no_utilisateur}">
-                                <form method="POST" action="${pageContext.request.contextPath}/enchere">
-                                    <td><b>Ma proposition :</b></td>
-                                    <td><input id="id" name="id" type="hidden" value="${a.noArticle}">
-                                        <input type="number" min="${minProposition}" value="${minProposition}" id="montant" name="montant">
-                                        <button style="margin-left: 10px;" class="btn btn-info" type="submit">Enchérir</button></td>
-                                </form>
-                            </c:if>
-                            </tr>
-                        </tbody>
-                    </table>
-				
-                    <!--<div class="row">
-                        <div class="offset-1 col-4">
-                            <button class="btn btn-lg btn-primary btn-block margintop" type="submit">Retour</button>
-                        </div>
-                    </div>-->
-			
-                </div>
-            </div>
+    <div class="container">
+    
+    <div class="row">
+    <c:forEach items="${listeArticle}" var="a">
+    
+    	<div style="margin-top:10px;" class="col-12 text-center">
+    		<h2>Détail vente</h2>
+    	</div>
+    
+	    <h1 style="margin: 10px 0px 20px 0px; padding-left:0px;" class="col-12"><small>${a.nomArticle}</small></h1>
+	
+	    <div class="col-md-7" style="padding-left:0px !important;">
+	      <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+	    </div>
+	
+	    <div class="col-md-5">
+	      <h3 style="margin-top:0px !important;" class="my-3">Détails :</h3>
+	      <div class="row">
+		      <div class="col-7">
+			      <ul>
+			        <li><span class="font-weight-bold">Catégorie : </span>${nomCategorie}</li>
+			        <li><span class="font-weight-bold">Fin de l'enchère : </span>${a.dateFinEncheres}</li>
+			        <li><span class="font-weight-bold">Vendeur : </span>${pseudoVendeur}</li>
+			        <li><span class="font-weight-bold">Description : </span>${a.description}</li>
+			      </ul>
+		      </div>
+		      <div class="col-5">
+			      <ul>
+			        <li><span class="font-weight-bold">Mise à prix : </span>${a.miseAPrix} Pts</li>
+			        <c:choose>
+                    	<c:when test="${meilleureOffre != 0}">
+                           	<li><span class="font-weight-bold">Meilleure offre : </span>${meilleureOffre} Pts par ${speudoMeilleureOffre}</li>  	
+					  	</c:when>
+			        	<c:otherwise>
+			        		<li><span class="font-weight-bold">Meilleure offre : </span>Aucune offre n'a été effectué</li>
+			        	</c:otherwise>
+		        	</c:choose>
+			      </ul>
+		      </div>
+	      </div>
+		  <c:if test="${idSession != no_utilisateur}">
+               <form method="POST" action="${pageContext.request.contextPath}/enchere">
+               		<h3 style="margin-top:0px !important;" class="my-3">Faire une enchère :</h3>
+                   	<input id="id" name="id" type="hidden" value="${a.noArticle}">
+                    <input type="number" min="${minProposition}" value="${minProposition}" id="montant" name="montant">
+               		<button style="margin-left: 10px;" class="btn btn-success" type="submit">Enchérir</button>
+               </form>
+          </c:if>
+	      <c:forEach items="${listeRetrait}" var="r">
+		      <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+				  <div class="card-header">Retrait</div>
+				  <div class="card-body">
+				    <p class="card-text">${r.rue}<br>${r.codePostal} ${r.ville}</p>
+				  </div>
+				</div>
 			</c:forEach>
-        </div>
-    </div>
+	    </div>
+	</c:forEach>
+
+  </div>
+            				
+	<div class="row">
+	    <div class="offset-4 col-4">
+	        <a href="<%=request.getContextPath() %>/ServletRedirectForm" class="btn btn-lg btn-primary btn-block margintop" type="submit">Retour</a>
+	    </div>
+	</div>
 
 <%@include file="fragments/Bottom.jsp"%>

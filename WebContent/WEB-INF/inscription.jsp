@@ -1,9 +1,9 @@
 <%@include file="fragments/Head.jsp"%>
-
+<%@include file="fragments/Menu.jsp"%>
 			
-    <form class="form-modif" action="${pageContext.request.contextPath}/ServletInscription" method="POST">
+    <form class="form-modif text-center" action="${pageContext.request.contextPath}/ServletInscription" method="POST">
 
-        <h1 class="h3 mb-3 font-weight-normal marginbottom">Créer votre profil</h1>
+        <h1 style="margin-top:20px;" class="h3 mb-3 font-weight-normal marginbottom">Créer votre profil</h1>
 
         <c:if test="${!empty listeCodesErreur}">
 				<div class="alert alert-danger"  role="alert">

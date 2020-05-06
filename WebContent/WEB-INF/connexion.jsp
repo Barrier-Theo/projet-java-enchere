@@ -41,6 +41,7 @@
         <a href="#" class="">mot de passe oublié</a>
 
         <a href="${pageContext.request.contextPath}/ServletInscription" style="color:white;" class="btn btn-lg btn-primary btn-block margintop marginbottom">Créer un compte</a>
+		<a href="${pageContext.request.contextPath}/ServletInscription" style="color:white;" class="btn btn-lg btn-secondary btn-block margintop marginbottom">Voir les enchères</a>
 
     </form>
 
