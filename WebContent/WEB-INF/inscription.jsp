@@ -1,14 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="messages.LecteurMessage" %>
-
 <%@include file="fragments/Head.jsp"%>
 
 			
     <form class="form-modif" action="${pageContext.request.contextPath}/ServletInscription" method="POST">
 
-        <h1 class="h3 mb-3 font-weight-normal marginbottom">CrÃ©er votre profil</h1>
+        <h1 class="h3 mb-3 font-weight-normal marginbottom">Créer votre profil</h1>
 
         <c:if test="${!empty listeCodesErreur}">
 				<div class="alert alert-danger"  role="alert">
@@ -38,14 +33,14 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="inputPrenom" class="col-sm-5 col-form-label">PrÃ©nom :</label>
+                        <label for="inputPrenom" class="col-sm-5 col-form-label">Prénom :</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="inputPrenom" name="prenom">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="inputTelephone" class="col-sm-5 col-form-label">TÃ©lÃ©phone :</label>
+                        <label for="inputTelephone" class="col-sm-5 col-form-label">Téléphone :</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="inputTelephone" name="telephone">
                         </div>
@@ -106,7 +101,7 @@
                 </div>
 
                 <div class="offset-3 col-3">
-                    <button class="btn btn-lg btn-success btn-block margintop" type="submit">CrÃ©er</button>
+                    <button class="btn btn-lg btn-success btn-block margintop" type="submit">Créer</button>
                 </div>
                 <div class=" col-4">
                     <a href ="${pageContext.request.contextPath}" style="color: white;" class="btn btn-lg btn-danger btn-block margintop">Annuler</a>
