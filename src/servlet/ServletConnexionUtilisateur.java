@@ -33,11 +33,8 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
-
-		rd = request.getRequestDispatcher("/connexion.jsp");
+		rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 		rd.forward(request, response);
-
-		
 	}
 
 	/**
@@ -59,7 +56,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
-			rd = request.getRequestDispatcher("/connexion.jsp");
+			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
 
 		}
 		rd.forward(request, response);
