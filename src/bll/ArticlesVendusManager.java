@@ -44,8 +44,8 @@ public class ArticlesVendusManager {
 		return this.articlesVendusDAO.selectArticleById(id);
 	}
 
-	public List<ArticlesVendus> selectByCategorie(Integer unIdDeCategorie) throws BusinessException {
-		return this.articlesVendusDAO.selectByFiltre(unIdDeCategorie);
+	public List<ArticlesVendus> selectByCategorie(Integer unIdDeCategorie, String contient) throws BusinessException {
+		return this.articlesVendusDAO.selectByFiltre(unIdDeCategorie, contient);
 	}
 	
 

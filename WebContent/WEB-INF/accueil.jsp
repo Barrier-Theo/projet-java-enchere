@@ -20,6 +20,7 @@
 				<br/>
 				<b>Catégorie :</b>
 				<select class="form-control" name="idCategorie">
+						<option value="0">...</option>
 					<c:forEach items="${listeCategories}" var="uneCategorie">
 						<option value="${uneCategorie.noCategorie}">${uneCategorie.libelle}</option>
 					</c:forEach>

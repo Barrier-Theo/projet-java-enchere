@@ -3,13 +3,11 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import bo.ArticlesVendus;
 import bo.Retraits;
-import bo.Utilisateur;
 import servlet.BusinessException;
 
 public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
@@ -19,7 +17,7 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 	private static final String SELECT_ALL="SELECT * FROM ARTICLES_VENDUS";
 	private static final String SELECT_ARTICLE_BY_ID="SELECT * FROM ARTICLES_VENDUS where no_article = ?";
 	private static final String INSERT_ENCHERE="INSERT INTO ENCHERES VALUES(?,?,?,?)";
-	private static final String SELECT_BY_CATEGORIE="SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
+	private static final String SELECT_BY_FILTRE="SELECT * FROM ARTICLES_VENDUS ";
 
 	
 	
@@ -204,7 +202,7 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 	
 	
 	@Override
-public List<ArticlesVendus> selectByFiltre(Integer unIdDeCategorie) throws BusinessException {
+public List<ArticlesVendus> selectByFiltre(Integer unIdDeCategorie, String contient) throws BusinessException {
 	if(unIdDeCategorie == null)
 	{
 		BusinessException businessException = new BusinessException();
@@ -217,8 +215,35 @@ public List<ArticlesVendus> selectByFiltre(Integer unIdDeCategorie) throws Busin
 	{
 		try
 		{
-			PreparedStatement pstmt = cnx.prepareStatement(SELECT_BY_CATEGORIE);
-			pstmt.setInt(1, unIdDeCategorie);
+			String WHERE = "";
+			String AJOUT = "";
+			Boolean withWhere = false;
+			if(unIdDeCategorie != 0) {
+				withWhere = true;
+				AJOUT += "no_categorie = ?";
+			}
+			if(!contient.isEmpty()) {
+				withWhere = true;
+				if(unIdDeCategorie != 0) {
+					AJOUT += " AND";
+				}
+				AJOUT +=  " nom_article LIKE ?";
+			}
+			if(withWhere == true) {
+				WHERE += "WHERE " + AJOUT;
+			}
+			String REQUETE = SELECT_BY_FILTRE + WHERE;
+			PreparedStatement pstmt = cnx.prepareStatement(REQUETE);
+			if(unIdDeCategorie != 0) {
+				pstmt.setInt(1, unIdDeCategorie);
+				if(!contient.isEmpty()) {
+					pstmt.setString(2, "%" + contient + "%");
+				}
+			} else {
+				if(!contient.isEmpty()) {
+					pstmt.setString(1, "%" + contient + "%");
+				}
+			}
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
 			{	
@@ -233,7 +258,7 @@ public List<ArticlesVendus> selectByFiltre(Integer unIdDeCategorie) throws Busin
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			System.out.println("erreur filtre categorie");
+			System.out.println("erreur filtre");
 			cnx.rollback();
 			throw e;
 		}
