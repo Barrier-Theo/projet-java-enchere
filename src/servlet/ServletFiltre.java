@@ -54,7 +54,7 @@ public class ServletFiltre extends HttpServlet {
 			request.setAttribute("listeEnchere", listeEnchere);
 			listeUtilisateur = utilisateurManager.selectAll();
 			request.setAttribute("listeUtilisateur", listeUtilisateur);
-			List<ArticlesVendus> listeArticles = listeArticleManager.selectAll();
+			List<ArticlesVendus> listeArticles = listeArticleManager.selectByCategorie(Integer.parseInt(request.getParameter("idCategorie")));
 			request.setAttribute("listeArticle", listeArticles);
 			listeCategories = categoriesManager.selectAll();
 			request.setAttribute("listeCategories", listeCategories);

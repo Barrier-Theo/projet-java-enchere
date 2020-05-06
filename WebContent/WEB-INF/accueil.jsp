@@ -16,7 +16,7 @@
 		<div class="col">
 	  		<form class="form-filtre" action="${pageContext.request.contextPath}/ServletFiltre" method="GET">
 				<b>Filtres :</b>
-				<input type="text" class="form-control" id="nomArticle" placeholder="Le nom de l'article contient">
+				<input type="text" class="form-control" id="nomArticle" name="contient" placeholder="Le nom de l'article contient">
 				<br/>
 				<b>Catégorie :</b>
 				<select class="form-control" name="idCategorie">
@@ -67,7 +67,7 @@
 					</div>
 				</c:if>
 				<br/> 
-				<button type="button" class="btn btn-primary btn-lg">Rechercher</button>
+				<button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
 			</form>
 		</div>
 		<div class="col-6">
