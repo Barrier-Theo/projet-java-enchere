@@ -41,7 +41,6 @@ public class ServletModificationProfil extends HttpServlet {
 		Map params = request.getParameterMap();
 			
 		String pseudo =  request.getParameter("pseudo");
-		String password= request.getParameter("mdpactuel");
 		String nom = request.getParameter("nom");
 		String prenom   = request.getParameter("prenom");
 		String email =  request.getParameter("email");
@@ -52,12 +51,22 @@ public class ServletModificationProfil extends HttpServlet {
 		String newpassword = request.getParameter("nouveaumdp");
 		String newpasswordCfm = request.getParameter("confirmation");
 		
-		Utilisateur utilisateur = new Utilisateur(id, pseudo,nom,prenom,email,telephone,rue,codePostal,ville,password, 500, false);
-		UtilisateurManager utilisateurManager = new UtilisateurManager();	
+		String mdpCourant = null; 
+		
+		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		Utilisateur utilisateur = new Utilisateur(id, pseudo,nom,prenom,email,telephone,rue,codePostal,ville, 500, false,false);
+		BusinessException businessException = new BusinessException();
+		List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
 		try {
+			
+			Utilisateur utilisateurConnecte = utilisateurManager.selectUser(id);
+			mdpCourant = utilisateurConnecte.getMotDePasse();
+			utilisateur.setMotDePasse(mdpCourant);
+
 			if(newpassword.trim().isEmpty() == false || newpasswordCfm.trim().isEmpty() == false) {
 				if(!newpassword.equals(newpasswordCfm)) {
 					request.setAttribute("erreurMdps","Les mots de passes ne sont pas identiques");
+					throw businessException;
 				}else {
 					utilisateur.setMotDePasse(newpassword);
 				}
@@ -65,12 +74,15 @@ public class ServletModificationProfil extends HttpServlet {
 			}
 			
 			utilisateurManager.modifierUtilisateur(utilisateur);
+			listeUtilisateur.add(utilisateur);
 			//TODO definir sur page d'accueil.
 			rd = request.getRequestDispatcher("/ServletProfil");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
-			rd = request.getRequestDispatcher("WEB-INF/modifierProfil.jsp");
 			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+			request.setAttribute("listeUtilisateur", listeUtilisateur);
+			rd = request.getRequestDispatcher("/ServletModifierProfil");
+
 		}
 		
 		rd.forward(request, response);				

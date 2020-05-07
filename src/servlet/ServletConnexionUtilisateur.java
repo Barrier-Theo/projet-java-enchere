@@ -52,7 +52,7 @@ public class ServletConnexionUtilisateur extends HttpServlet {
 		try {
 			idUtilisateur= utilisateurManager.findIdByPseudoPassword(pseudo, password);
 			session.setAttribute("id", idUtilisateur);
-			rd = request.getRequestDispatcher("/ServletAccueil");
+			rd = request.getRequestDispatcher("/ServletRedirectForm");
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur",e.getListeCodesErreur());

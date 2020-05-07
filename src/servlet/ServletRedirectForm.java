@@ -23,8 +23,7 @@ public class ServletRedirectForm extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
-		rd = request.getRequestDispatcher("/ServletAccueil");
-		rd.forward(request, response);
+		response.sendRedirect("./ServletAccueil");
 	}
 	
 
