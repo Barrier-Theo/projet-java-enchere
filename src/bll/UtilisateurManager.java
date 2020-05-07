@@ -91,7 +91,7 @@ public class UtilisateurManager {
 		this.verifNullTrimLength(telephone, 15, CodesResultatBLL.REGLE_TELEPHONE);
 		this.verifNullTrimLength(rue, 30, CodesResultatBLL.REGLE_VILLE);
 		this.verifNullTrimLength(codePostale, 10, CodesResultatBLL.REGLE_CODEPOSTALE);
-		this.verifNullTrimLength(ville, 10, CodesResultatBLL.REGLE_VILLE);
+		this.verifNullTrimLength(ville, 30, CodesResultatBLL.REGLE_VILLE);
 		
 	
 	}
