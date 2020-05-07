@@ -38,7 +38,7 @@ public class ServletSupprimer extends HttpServlet {
 
 		try {
 			utilisateurManager.supprimerUtilisateur(id);
-			rd = request.getRequestDispatcher("/ServletInscription");
+			rd = request.getRequestDispatcher("/deconnexion");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
