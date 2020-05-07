@@ -103,6 +103,9 @@ SELECT * FROM UTILISATEURS where pseudo = 'tbarrier' and mot_de_passe = '123mdp'
 
 
 ALTER TABLE UTILISATEURS ADD isDelete BIT NOT NULL DEFAULT 0;
+ALTER TABLE ENCHERES ADD date_enchere DATE ;
+ALTER TABLE ENCHERES ADD montant_enchere int;
+
 
 UPDATE UTILISATEURS SET isDelete = 0 WHERE pseudo = 'tbarrierd';
 
@@ -120,3 +123,4 @@ GROUP BY no_article, no_utilisateur,date_enchere;
 
 
 UPDATE ENCHERES SET no_utilisateur = 10, montant_enchere = 231  WHERE no_article = 16 ;
+UPDATE UTILISATEURS SET credit = credit + 1 where no_utilisateur = 10;

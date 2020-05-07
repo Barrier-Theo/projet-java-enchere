@@ -16,6 +16,9 @@ public class EncheresDAOJdbcImpl implements EncheresDAO {
 private static final String SELECT_ALL="SELECT * FROM ENCHERES";
 private static final String SELECT_MAX_MONTANT_ENCHERE_BY_ID="SELECT TOP 1 MAX(montant_enchere) AS montant, no_article, no_utilisateur, date_enchere FROM ENCHERES  where no_article = ? GROUP BY no_article, no_utilisateur,date_enchere";
 private static final String UPDATE_ENCHERE="UPDATE ENCHERES SET no_utilisateur = ?, montant_enchere = ?  WHERE no_article = ? ";
+private static final String UPDATE_CREDIT_UTILISATEUR_MOINS="UPDATE UTILISATEURS SET credit = credit - ? where no_utilisateur = ?";
+private static final String UPDATE_CREDIT_UTILISATEUR_PLUS="UPDATE UTILISATEURS SET credit = credit + ? where no_utilisateur = ?";
+
 
 
 
@@ -89,7 +92,7 @@ private static final String UPDATE_ENCHERE="UPDATE ENCHERES SET no_utilisateur =
 	}
 
 	@Override
-	public void updateEnchere(Encheres enchere) throws BusinessException {
+	public void updateEnchereEtCreditUtilisateur(Encheres enchere) throws BusinessException {
 		if(enchere==null)
 		{
 			BusinessException businessException = new BusinessException();
@@ -117,6 +120,109 @@ private static final String UPDATE_ENCHERE="UPDATE ENCHERES SET no_utilisateur =
 			{
 				e.printStackTrace();
 				System.out.println("erreur modification encheres");
+				cnx.rollback();
+				throw e;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_NULL);
+			throw businessException;
+		}
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			try
+			{
+				cnx.setAutoCommit(false);
+				PreparedStatement pstmt;
+				ResultSet rs;
+					pstmt = cnx.prepareStatement(UPDATE_CREDIT_UTILISATEUR_MOINS);
+					pstmt.setInt(1, enchere.getPrixVente());
+					pstmt.setInt(2, enchere.getNoUtilisateur());
+					pstmt.executeUpdate();
+					pstmt.close();
+
+				cnx.commit();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("erreur update credit utilisateur");
+				cnx.rollback();
+				throw e;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_NULL);
+			throw businessException;
+		}
+
+		
+	}
+
+	@Override
+	public void updateCreditAncienUtilisateur(Encheres enchere) throws BusinessException {
+		
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			try
+			{
+				cnx.setAutoCommit(false);
+				PreparedStatement pstmt;
+				ResultSet rs;
+					pstmt = cnx.prepareStatement(UPDATE_CREDIT_UTILISATEUR_PLUS);
+					pstmt.setInt(1, enchere.getPrixVente());
+					pstmt.setInt(2, enchere.getNoUtilisateur());
+					pstmt.executeUpdate();
+					pstmt.close();
+
+				cnx.commit();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("erreur update credit utilisateur");
+				cnx.rollback();
+				throw e;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_NULL);
+			throw businessException;
+		}
+
+	}
+
+	@Override
+	public void updateCreditAuVendeur(Integer idUtilisateurVendeur, Integer prixVente) throws BusinessException {
+
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			try
+			{
+				cnx.setAutoCommit(false);
+				PreparedStatement pstmt;
+				ResultSet rs;
+					pstmt = cnx.prepareStatement(UPDATE_CREDIT_UTILISATEUR_PLUS);
+					pstmt.setInt(1, prixVente);
+					pstmt.setInt(2, idUtilisateurVendeur);
+					pstmt.executeUpdate();
+					pstmt.close();
+
+				cnx.commit();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("erreur update credit utilisateur");
 				cnx.rollback();
 				throw e;
 			}

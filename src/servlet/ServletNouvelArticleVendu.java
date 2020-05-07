@@ -93,12 +93,11 @@ public class ServletNouvelArticleVendu extends HttpServlet{
 		
 		if(session.getAttribute("id").toString() == null) {
 			rd = request.getRequestDispatcher("WEB-INF/connexion.jsp");
+			rd.forward(request, response);
 		}else {
-			rd = request.getRequestDispatcher("/ServletRedirectForm");
+			response.sendRedirect("./ServletAccueil");
 		}
-		rd.forward(request, response);
-
-
+		
 	}
 
 

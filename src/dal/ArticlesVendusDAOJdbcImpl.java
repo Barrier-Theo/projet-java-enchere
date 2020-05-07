@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import bo.ArticlesVendus;
@@ -19,6 +21,7 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 	private static final String SELECT_ALL="SELECT * FROM ARTICLES_VENDUS";
 	private static final String SELECT_ARTICLE_BY_ID="SELECT * FROM ARTICLES_VENDUS where no_article = ?";
 	private static final String INSERT_ENCHERE="INSERT INTO ENCHERES VALUES(?,?,?,?)";
+	private static final String SELECT_BY_FILTRE="SELECT * FROM ARTICLES_VENDUS ";
 
 	
 	
@@ -200,4 +203,76 @@ public class ArticlesVendusDAOJdbcImpl implements ArticlesVendusDAO {
 			throw businessException;
 		}
 	}
+
+
+	@Override
+public List<ArticlesVendus> selectByFiltre(Integer unIdDeCategorie, String contient) throws BusinessException {
+	if(unIdDeCategorie == null)
+	{
+		BusinessException businessException = new BusinessException();
+		businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_CATEGORIE_LISTE_ECHEC);
+		throw businessException;
+	}
+	List<ArticlesVendus> listeArticlesVendus = new ArrayList<>();
+
+	try(Connection cnx = ConnectionProvider.getConnection())
+	{
+		try
+		{
+			String WHERE = "";
+			String AJOUT = "";
+			Boolean withWhere = false;
+			if(unIdDeCategorie != 0) {
+				withWhere = true;
+				AJOUT += "no_categorie = ?";
+			}
+			if(!contient.isEmpty()) {
+				withWhere = true;
+				if(unIdDeCategorie != 0) {
+					AJOUT += " AND";
+				}
+				AJOUT +=  " nom_article LIKE ?";
+			}
+			if(withWhere == true) {
+				WHERE += "WHERE " + AJOUT;
+			}
+			String REQUETE = SELECT_BY_FILTRE + WHERE;
+			PreparedStatement pstmt = cnx.prepareStatement(REQUETE);
+			if(unIdDeCategorie != 0) {
+				pstmt.setInt(1, unIdDeCategorie);
+				if(!contient.isEmpty()) {
+					pstmt.setString(2, "%" + contient + "%");
+				}
+			} else {
+				if(!contient.isEmpty()) {
+					pstmt.setString(1, "%" + contient + "%");
+				}
+			}
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				ArticlesVendus unArticleVendu = new ArticlesVendus(rs.getInt("no_article"), rs.getString("nom_article"), rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(), rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"), rs.getInt("prix_vente"), rs.getInt("no_utilisateur"), rs.getInt("no_categorie"));
+				listeArticlesVendus.add(unArticleVendu);
+			}
+			rs.close();
+			pstmt.close();
+			return listeArticlesVendus;
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("erreur filtre");
+			cnx.rollback();
+			throw e;
+		}
+	}
+	catch(Exception e)
+	{
+		e.printStackTrace();
+		BusinessException businessException = new BusinessException();
+		businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_CATEGORIE_LISTE_ECHEC);
+		throw businessException;
+	}
+}
 }

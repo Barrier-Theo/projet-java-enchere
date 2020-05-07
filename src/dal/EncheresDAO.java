@@ -11,6 +11,11 @@ public interface EncheresDAO {
 
 	public Encheres selectMeilleureOffreById(Integer noArticle) throws BusinessException;
 
-	public void updateEnchere(Encheres enchere) throws BusinessException;
+	public void updateEnchereEtCreditUtilisateur(Encheres enchere) throws BusinessException;
+
+	public void updateCreditAncienUtilisateur(Encheres enchere)  throws BusinessException;
+
+	public void updateCreditAuVendeur(Integer idUtilisateurVendeur, Integer prixVente) throws BusinessException;
+	
 	
 }
